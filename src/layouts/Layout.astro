@@ -7,20 +7,111 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@600&display=swap" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css" rel="stylesheet"/>
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+		<header class="header">
+			<h1 class="header-logo">
+				<a href="" class="header-logo-link">
+					<span class="header-logo--main">ミラテル</span>
+					<span class="header-logo--sub">AI未来洞察</span>
+				</a>
+			</h1>
+			<div class="sp-header">
+				<search class="sp-header-search">
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M14.0001 13.9999L11.1048 11.1046M11.1048 11.1046C11.6001 10.6093 11.9929 10.0213 12.261 9.37426C12.529 8.72717 12.6669 8.03363 12.6669 7.33323C12.6669 6.63283 12.529 5.93928 12.261 5.2922C11.9929 4.64511 11.6001 4.05715 11.1048 3.56189C10.6095 3.06663 10.0216 2.67377 9.3745 2.40574C8.72742 2.13771 8.03387 1.99976 7.33347 1.99976C6.63307 1.99976 5.93953 2.13771 5.29244 2.40574C4.64535 2.67377 4.0574 3.06663 3.56214 3.56189C2.56192 4.56211 2 5.9187 2 7.33323C2 8.74775 2.56192 10.1043 3.56214 11.1046C4.56236 12.1048 5.91895 12.6667 7.33347 12.6667C8.748 12.6667 10.1046 12.1048 11.1048 11.1046Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>			
+					<p class="sp-header-search-label">記事を検索</p>		
+				</search>
+				<h1 class="sp-header-logo">
+					<a href="" class="sp-header-logo-link">
+						<span class="sp-header-logo--main">ミラテル</span>
+						<span class="sp-header-logo--sub">AI未来洞察</span>
+					</a>
+				</h1>
+				<div class="sp-header-ham">
+					<sp class="ham-elem"></sp>
+					<sp class="ham-elem"></sp>
+					<sp class="ham-elem"></sp>
+				</div>
+			</div>
+		</header>
+		<div class="container">
+			<aside class="aside">
+				<div class="aside-inner">
+					<div class="aside-box">
+						<h3 class="aside-label">知る</h3>
+						<ul class="aside-linkList">
+							<li class="aside-linkList-item">
+								<a href="#" class="aside-linkList-item-link">
+									<span class="aside-linkList-item-link-label">ミラテルとは</span>
+									<span class="aside-linkList-item-link-arrow">→</span>
+								</a>
+							</li>
+							<li class="aside-linkList-item">
+								<a href="#" class="aside-linkList-item-link">
+									<span class="aside-linkList-item-link-label">ミラテルの使い方</span>
+									<span class="aside-linkList-item-link-arrow">→</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="aside-box">
+						<h3 class="aside-label">記事を探す</h3>
+						<search class="aside-search">
+							<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M14.0001 13.9999L11.1048 11.1046M11.1048 11.1046C11.6001 10.6093 11.9929 10.0213 12.261 9.37426C12.529 8.72717 12.6669 8.03363 12.6669 7.33323C12.6669 6.63283 12.529 5.93928 12.261 5.2922C11.9929 4.64511 11.6001 4.05715 11.1048 3.56189C10.6095 3.06663 10.0216 2.67377 9.3745 2.40574C8.72742 2.13771 8.03387 1.99976 7.33347 1.99976C6.63307 1.99976 5.93953 2.13771 5.29244 2.40574C4.64535 2.67377 4.0574 3.06663 3.56214 3.56189C2.56192 4.56211 2 5.9187 2 7.33323C2 8.74775 2.56192 10.1043 3.56214 11.1046C4.56236 12.1048 5.91895 12.6667 7.33347 12.6667C8.748 12.6667 10.1046 12.1048 11.1048 11.1046Z" stroke="#ECEBF3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>			
+							<input class="aside-search-input" type="text" placeholder="キーワードで検索">					
+						</search>
+						<ul class="aside-tagList">
+							<li class="aside-tagList-item">
+								<a href="#" class="aside-tagList-item-link">Techology</a>
+							</li>
+							<li class="aside-tagList-item">
+								<a href="#" class="aside-tagList-item-link">Society</a>
+							</li>
+							<li class="aside-tagList-item">
+								<a href="#" class="aside-tagList-item-link">Energy</a>
+							</li>
+							<li class="aside-tagList-item">
+								<a href="#" class="aside-tagList-item-link">Environment</a>
+							</li>
+							<li class="aside-tagList-item">
+								<a href="#" class="aside-tagList-item-link">Education</a>
+							</li>
+							<li class="aside-tagList-item">
+								<a href="#" class="aside-tagList-item-link">Economy</a>
+							</li>
+						</ul>
+					</div>
+					<div class="aside-user">
+						<a href="" class="aside-userIcon">
+							<svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M10 10C10 8.4087 10.6321 6.88258 11.7574 5.75736C12.8826 4.63214 14.4087 4 16 4C17.5913 4 19.1174 4.63214 20.2426 5.75736C21.3679 6.88258 22 8.4087 22 10C22 11.5913 21.3679 13.1174 20.2426 14.2426C19.1174 15.3679 17.5913 16 16 16C14.4087 16 12.8826 15.3679 11.7574 14.2426C10.6321 13.1174 10 11.5913 10 10ZM6 28V27C6 24.6131 6.94821 22.3239 8.63604 20.636C10.3239 18.9482 12.6131 18 15 18H17C19.3869 18 21.6761 18.9482 23.364 20.636C25.0518 22.3239 26 24.6131 26 27V28H6Z" fill="#252528"/>
+							</svg>							
+						</a>
+						<p class="aside-user-name">ゲストユーザー</p>
+					</div>
+				</div>
+			</aside>
+		  <slot />
+		</div>
 	</body>
 </html>
-<style is:global>
+<style lang="scss" is:global>
 	:root {
 		--accent: 136, 58, 234;
 		--accent-light: 224, 204, 250;
@@ -34,7 +125,8 @@ const { title } = Astro.props;
 	}
 	html {
 		font-family: system-ui, sans-serif;
-		background: #13151a;
+		background: #ECEBF3;
+		min-width: 340px;
 	}
 	code {
 		font-family:
@@ -46,5 +138,248 @@ const { title } = Astro.props;
 			Bitstream Vera Sans Mono,
 			Courier New,
 			monospace;
+	}
+
+	.header{
+		position: fixed;
+		top: 32px;
+		left: 24px;
+		z-index: 99;
+
+		@media screen and (max-width:834px) {
+        width: 100%;
+				top: 0;
+				left: 0;
+				padding: 24px 16px 0;
+      }
+
+		@media screen and (max-width:834px) {
+      // display: none;
+    }
+
+		&-logo{
+			border: 1px solid #252528;
+			border-radius: 100px;
+			
+			@media screen and (max-width:834px) {
+        display: none;
+      }
+			// font-family: 'Noto Sans JP', sans-serif;
+			
+
+			&-link{
+				display: flex;
+			  align-items: flex-end;
+			  justify-content: center;
+			  gap: 8px;
+			  padding: 12px 24px;
+			}
+
+			&--main{
+				font-size: 18px;
+				font-weight: 600;
+				color: #252528;
+			}
+
+			&--sub{
+				font-size: 12px;
+				font-weight: 500;
+				color: #252528;
+				line-height: 1.6;
+			}
+		}
+	}
+
+	.sp-header{
+		  display: none;
+		  position: relative;
+		  width: 100%;
+			align-items: center;
+			justify-content: center;
+			// margin-inline: auto;
+			padding: 16px 0;
+			// border: 1px solid #252528;
+			background-color: #252528;
+			border-radius: 100px;
+
+			@media screen and (max-width:834px) {
+        display: flex;
+      }
+
+			&-search{
+				position: absolute;
+				top: 50%;
+				left: 16px;
+				transform: translateY(-50%);
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				padding: 8px;
+
+				&-label{
+					font-size: 12px;
+					color: #c3c3c3;
+					display: none;
+				}
+			}
+
+			&-logo{
+				text-align: center;
+				
+				&-link{
+					display: flex;
+					align-items: center;
+					gap: 8px;
+				}
+
+				&--main{
+					font-size: 20px;
+					font-weight: 600;
+					color: #fff;
+				}
+
+				&--sub{
+					font-size: 14px;
+					font-weight: 500;
+					color: #fff;
+				}
+			}
+
+			&-ham{
+				position: absolute;
+				top: 50%;
+				right: 16px;
+				transform: translateY(-50%);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 6px;
+				padding: 8px;
+				
+				>.ham-elem{
+					width: 32px;
+					height: 2px;
+					border-radius: 100px;
+					background-color: #fff;
+				}
+			}
+		}
+
+	.container{
+		width: 100%;
+	}
+
+	.aside{
+		// width: 20vw;
+		max-width: 280px;
+		position: fixed;
+		top: 104px;
+		left: 24px;
+		padding: 24px 24px;
+		border-radius: 32px;
+		background-color: #252528;
+		color: #fff;
+
+		@media screen and (max-width:834px) {
+      display: none;
+    }
+
+		&-inner{
+			display: flex;
+			flex-direction: column;
+			gap: 40px;
+		}
+
+		&-box{
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+		}
+
+		&-label{
+			font-size: 12px;
+		}
+
+		&-linkList{
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+
+			&-item{
+
+				&-link{
+					display: inline-block;
+					padding: 8px 16px;
+					border: 1px solid #cdcdcd;
+					border-radius: 100px;
+
+					&-label{
+						font-size: 12px;
+					}
+				}
+			}
+		}
+
+		&-search{
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			padding: 10px 16px;
+			border-radius: 100px;
+			border: 1px solid #fff;
+
+			&-input{
+				font-size: 12px;
+				color: #bdbdbd;
+			}
+		}
+
+		&-tagList{
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+
+			&-item{
+				position: relative;
+				padding: 8px;
+
+			// 	&::after{
+			// 	content: "";
+			// 	position: absolute;
+			// 	top: 50%;
+			// 	left: -12px;
+			// 	transform: translateY(-50%);
+			// 	width: 4px;
+			// 	height: 4px;
+			// 	border-radius: 100px;
+			// 	background-color: rgb(255, 255, 255);
+			// }
+
+				&-link{
+					display: block;
+					font-size: 12px;
+				}
+			}
+		}
+
+		&-user{
+			display: flex;
+			align-items: center;
+			gap: 8px;
+
+			&Icon{
+			position: relative;
+			display: inline-flex;
+			align-self: flex-start;
+			padding: 8px;
+			border-radius: 100px;
+			background-color: #ECEBF3;
+		  }
+
+		  &-name{
+			  font-size: 12px;
+				color: #bdbdbd;
+			}
+		}
 	}
 </style>
