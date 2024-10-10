@@ -28,6 +28,8 @@ export type Blog = {
     url: string;
   }
   tag: string;
+  article_ref: string;
+  article_ref_link: string;
   article_name: string;
   article_summary: string;
   article_link: string;
