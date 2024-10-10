@@ -13,7 +13,7 @@ const client = createClient({
 //       },
 //     }));
 //   }
-  
+
 
 //型定義
 export type Blog = {
