@@ -10,7 +10,6 @@ const response = await getBlogs({ fields: ["id", "title", "thumbnail", "tag", "p
         <img class="article-item-img"  src={content.thumbnail.url} alt="" />
         <ul class="article-item-tagList">
           <li class="article-item-tagList-item">{content.tag}</li>
-          <li class="article-item-tagList-item">{content.tag}</li>
         </ul>
         <h3 class="article-item-title">{content.title}</h3>
         <div class="article-item-footer">
