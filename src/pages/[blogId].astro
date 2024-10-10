@@ -54,9 +54,11 @@ import ArticleList from '../components/ArticleList.astro';
           <div class="article-text" set:html={blog.content} />
           <div class="article-ref">
             <p class="article-ref-label">参照元</p>
-            <a href={blog.article_ref_link} class="article-ref-link">{blog.article_ref}</a>
+            <div class="article-ref-link" set:html={blog.article_ref_link} />
+            <!-- <a href={blog.article_ref_link} class="article-ref-link">{blog.article_ref}</a> -->
             <p class="article-ref-name">{blog.article_name}</p>
-            <a href={blog.article_link} class="article-ref-name-link">{blog.article_link}</a>
+            <!-- <a href={blog.article_link} class="article-ref-name-link">{blog.article_link}</a> -->
+            <div class="article-ref-link" set:html={blog.article_link} />
             <p class="article-ref-summary">{blog.article_summary}</p>
           </div>
         </section>
