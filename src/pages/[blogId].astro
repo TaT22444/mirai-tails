@@ -85,45 +85,177 @@ import ArticleList from '../components/ArticleList.astro';
           <div class="article-comment">
             <p class="article-comment-label">コメント</p>
             <div class="article-comment-inner">
+              <div class="article-comment-inputBox">
+                <img src={blog.thumbnail.url} alt="" class="article-comment-inputBox-userIcon">
+                <textarea placeholder="あなたの意見を書く" class="article-comment-inputBox-input"></textarea>
+                <button class="article-comment-inputBox-btn">
+                  <p class="article-comment-inputBox-btn-label">投稿</p>
+                </button>
+              </div>
+              <div class="article-comment-header">
+                    <p class="article-comment-header-filterLabel">注目順</p>
+                    <ul class="article-comment-header-filterList">
+                          <li class="article-comment-header-filterList-item">
+                            <button class="article-comment-header-filterList-btn active">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.66 11.2C17.43 10.9 17.15 10.64 16.89 10.38C16.22 9.78 15.46 9.35 14.82 8.72C13.33 7.26 13 4.85 13.95 3C13 3.23 12.17 3.75 11.46 4.32C8.87005 6.4 7.85005 10.07 9.07005 13.22C9.11005 13.32 9.15005 13.42 9.15005 13.55C9.15005 13.77 9.00005 13.97 8.80005 14.05C8.57005 14.15 8.33005 14.09 8.14005 13.93C8.08329 13.8825 8.03583 13.8248 8.00005 13.76C6.87005 12.33 6.69005 10.28 7.45005 8.64C5.78005 10 4.87005 12.3 5.00005 14.47C5.06005 14.97 5.12005 15.47 5.29005 15.97C5.43005 16.57 5.70005 17.17 6.00005 17.7C7.08005 19.43 8.95005 20.67 10.96 20.92C13.1 21.19 15.3901 20.8 17.0301 19.32C18.8601 17.66 19.5 15 18.56 12.72L18.43 12.46C18.22 12 17.66 11.2 17.66 11.2ZM14.5 17.5C14.22 17.74 13.76 18 13.4 18.1C12.28 18.5 11.16 17.94 10.5 17.28C11.69 17 12.4 16.12 12.61 15.23C12.78 14.43 12.46 13.77 12.33 13C12.21 12.26 12.23 11.63 12.5 10.94C12.69 11.32 12.89 11.7 13.13 12C13.9 13 15.11 13.44 15.37 14.8C15.41 14.94 15.43 15.08 15.43 15.23C15.46 16.05 15.1 16.95 14.5 17.5Z" fill="black"/>
+                              </svg>
+                            </button>
+                          </li>
+                          <li class="article-comment-header-filterList-item">
+                            <button class="article-comment-header-filterList-btn">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 15L11.2929 8.70711C11.6834 8.31658 12.3166 8.31658 12.7071 8.70711L19 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>   
+                            </button>
+                          </li>
+                          <li class="article-comment-header-filterList-item">
+                            <button class="article-comment-header-filterList-btn">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L5 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>        
+                            </button>
+                          </li>
+                    </ul>
+              </div>
               <div class="article-comment-box">
-                <div class="article-comment-box-header">
-                    <p class="article-comment-box-filterLabel">注目順</p>
-                    <ul class="article-comment-box-filterList">
-                      <li class="article-comment-box-filterList-item">
-                        <button class="article-comment-box-filterList-btn">
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.66 11.2C17.43 10.9 17.15 10.64 16.89 10.38C16.22 9.78 15.46 9.35 14.82 8.72C13.33 7.26 13 4.85 13.95 3C13 3.23 12.17 3.75 11.46 4.32C8.87005 6.4 7.85005 10.07 9.07005 13.22C9.11005 13.32 9.15005 13.42 9.15005 13.55C9.15005 13.77 9.00005 13.97 8.80005 14.05C8.57005 14.15 8.33005 14.09 8.14005 13.93C8.08329 13.8825 8.03583 13.8248 8.00005 13.76C6.87005 12.33 6.69005 10.28 7.45005 8.64C5.78005 10 4.87005 12.3 5.00005 14.47C5.06005 14.97 5.12005 15.47 5.29005 15.97C5.43005 16.57 5.70005 17.17 6.00005 17.7C7.08005 19.43 8.95005 20.67 10.96 20.92C13.1 21.19 15.3901 20.8 17.0301 19.32C18.8601 17.66 19.5 15 18.56 12.72L18.43 12.46C18.22 12 17.66 11.2 17.66 11.2ZM14.5 17.5C14.22 17.74 13.76 18 13.4 18.1C12.28 18.5 11.16 17.94 10.5 17.28C11.69 17 12.4 16.12 12.61 15.23C12.78 14.43 12.46 13.77 12.33 13C12.21 12.26 12.23 11.63 12.5 10.94C12.69 11.32 12.89 11.7 13.13 12C13.9 13 15.11 13.44 15.37 14.8C15.41 14.94 15.43 15.08 15.43 15.23C15.46 16.05 15.1 16.95 14.5 17.5Z" fill="black"/>
-                          </svg>
+                <div class="article-comment-commentList">
+                  <div class="article-comment-commentList-item">
+                    <img src={blog.thumbnail.url} alt="" class="img">
+                    <div class="article-comment-commentList-item-body">
+                      <div class="article-comment-commentList-item-body-header">
+                        <button class="userName">tatsu22444</button>
+                        <p class="time">20時間前</p>
+                        <button class="dots">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
                         </button>
-                      </li>
-                      <li class="article-comment-box-filterList-item">
-                        <button class="article-comment-box-filterList-btn">
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 15L11.2929 8.70711C11.6834 8.31658 12.3166 8.31658 12.7071 8.70711L19 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </div>
+                      <p class="comment">この意見はどうかと思う。データか何かあるんですか？</p>
+                      <div class="article-comment-commentList-item-body-footer">
+                        <button class="article-comment-commentList-item-body-like">
+                          <svg width="14" height="14" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 5.04165L10.505 5.51832C10.5692 5.58486 10.6461 5.63778 10.7311 5.67393C10.8162 5.71008 10.9076 5.72871 11 5.72871C11.0925 5.72871 11.1839 5.71008 11.269 5.67393C11.354 5.63778 11.4309 5.58486 11.495 5.51832L11 5.04165ZM8.64054 16.7952C7.25087 15.6997 5.73196 14.63 4.52654 13.2733C3.34587 11.9423 2.52087 10.3904 2.52087 8.37557H1.14587C1.14587 10.8194 2.16337 12.6839 3.49896 14.1863C4.80979 15.6622 6.48179 16.8447 7.78896 17.875L8.64054 16.7952ZM2.52087 8.37557C2.52087 6.40474 3.63462 4.75107 5.15537 4.05532C6.63304 3.37974 8.61854 3.55849 10.505 5.51832L11.495 4.5659C9.25837 2.24032 6.65871 1.85624 4.58337 2.80499C2.55387 3.73357 1.14587 5.88957 1.14587 8.37557H2.52087ZM7.78896 17.875C8.25921 18.2453 8.76337 18.6395 9.27396 18.9383C9.78454 19.2372 10.3675 19.4792 11 19.4792V18.1042C10.7159 18.1042 10.3822 17.9942 9.96787 17.7512C9.55262 17.5092 9.12271 17.1756 8.64054 16.7952L7.78896 17.875ZM14.2111 17.875C15.5183 16.8437 17.1903 15.6631 18.5011 14.1863C19.8367 12.683 20.8542 10.8194 20.8542 8.37557H19.4792C19.4792 10.3904 18.6542 11.9423 17.4735 13.2733C16.2681 14.63 14.7492 15.6997 13.3595 16.7952L14.2111 17.875ZM20.8542 8.37557C20.8542 5.88957 19.4471 3.73357 17.4167 2.80499C15.3414 1.85624 12.7435 2.24032 10.505 4.56499L11.495 5.51832C13.3815 3.5594 15.367 3.37974 16.8447 4.05532C18.3655 4.75107 19.4792 6.40382 19.4792 8.37557H20.8542ZM13.3595 16.7952C12.8774 17.1756 12.4475 17.5092 12.0322 17.7512C11.617 17.9932 11.2842 18.1042 11 18.1042V19.4792C11.6325 19.4792 12.2155 19.2362 12.7261 18.9383C13.2376 18.6395 13.7409 18.2453 14.2111 17.875L13.3595 16.7952Z" fill="#89898b"/>
                           </svg>   
+                          <p class="label">120</p>                         
+                        </button>
+                        <button class="openComment">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.59195 15.304C2.34395 9.787 6.40296 3.75 12.36 3.75H12.681C14.8206 3.75053 16.8724 4.60072 18.3853 6.11365C19.8982 7.62658 20.7484 9.6784 20.749 11.818C20.7492 12.9976 20.5171 14.1657 20.0658 15.2556C19.6145 16.3454 18.9529 17.3357 18.1188 18.1698C17.2847 19.0039 16.2944 19.6655 15.2045 20.1168C14.1147 20.5681 12.9466 20.8003 11.767 20.8H3.94695C3.79158 20.8001 3.63999 20.752 3.51314 20.6623C3.38629 20.5725 3.29045 20.4456 3.23885 20.2991C3.18725 20.1525 3.18245 19.9935 3.2251 19.8441C3.26775 19.6947 3.35576 19.5622 3.47695 19.465L5.44795 17.882C5.4901 17.8482 5.52018 17.8018 5.5337 17.7495C5.54722 17.6972 5.54345 17.642 5.52295 17.592L4.59195 15.304ZM12.36 5.25C7.46695 5.25 4.13396 10.207 5.97995 14.738L6.91196 17.027C7.05396 17.3759 7.07957 17.7614 6.98498 18.126C6.89039 18.4907 6.68066 18.8151 6.38696 19.051L6.07796 19.3H11.767C12.7496 19.3003 13.7226 19.1069 14.6305 18.731C15.5384 18.3551 16.3633 17.804 17.0581 17.1092C17.7529 16.4143 18.304 15.5894 18.68 14.6815C19.0559 13.7737 19.2492 12.8006 19.249 11.818C19.2484 10.0762 18.5563 8.40593 17.3246 7.17431C16.093 5.94268 14.4227 5.25053 12.681 5.25H12.36Z" fill="#89898b"/>
+                          </svg>                        
+                          <p class="label">2件のコメントを表示</p>                                
+                        </button>
+                      </div>
+                    </div>
+                    <button class="replyBtn">
+                      返信
+                    </button>
+                  </div>
+                  <div class="article-comment-commentList-item">
+                    <img src={blog.thumbnail.url} alt="" class="img">
+                    <div class="article-comment-commentList-item-body">
+                      <div class="article-comment-commentList-item-body-header">
+                        <button class="userName">tatsu22444</button>
+                        <p class="time">20時間前</p>
+                        <button class="dots">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </button>
+                      </div>
+                      <p class="comment">この意見はどうかと思う。データか何かあるんですか？</p>
+                      <div class="article-comment-commentList-item-body-footer">
+                        <button class="article-comment-commentList-item-body-like">
+                          <svg width="14" height="14" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 5.04165L10.505 5.51832C10.5692 5.58486 10.6461 5.63778 10.7311 5.67393C10.8162 5.71008 10.9076 5.72871 11 5.72871C11.0925 5.72871 11.1839 5.71008 11.269 5.67393C11.354 5.63778 11.4309 5.58486 11.495 5.51832L11 5.04165ZM8.64054 16.7952C7.25087 15.6997 5.73196 14.63 4.52654 13.2733C3.34587 11.9423 2.52087 10.3904 2.52087 8.37557H1.14587C1.14587 10.8194 2.16337 12.6839 3.49896 14.1863C4.80979 15.6622 6.48179 16.8447 7.78896 17.875L8.64054 16.7952ZM2.52087 8.37557C2.52087 6.40474 3.63462 4.75107 5.15537 4.05532C6.63304 3.37974 8.61854 3.55849 10.505 5.51832L11.495 4.5659C9.25837 2.24032 6.65871 1.85624 4.58337 2.80499C2.55387 3.73357 1.14587 5.88957 1.14587 8.37557H2.52087ZM7.78896 17.875C8.25921 18.2453 8.76337 18.6395 9.27396 18.9383C9.78454 19.2372 10.3675 19.4792 11 19.4792V18.1042C10.7159 18.1042 10.3822 17.9942 9.96787 17.7512C9.55262 17.5092 9.12271 17.1756 8.64054 16.7952L7.78896 17.875ZM14.2111 17.875C15.5183 16.8437 17.1903 15.6631 18.5011 14.1863C19.8367 12.683 20.8542 10.8194 20.8542 8.37557H19.4792C19.4792 10.3904 18.6542 11.9423 17.4735 13.2733C16.2681 14.63 14.7492 15.6997 13.3595 16.7952L14.2111 17.875ZM20.8542 8.37557C20.8542 5.88957 19.4471 3.73357 17.4167 2.80499C15.3414 1.85624 12.7435 2.24032 10.505 4.56499L11.495 5.51832C13.3815 3.5594 15.367 3.37974 16.8447 4.05532C18.3655 4.75107 19.4792 6.40382 19.4792 8.37557H20.8542ZM13.3595 16.7952C12.8774 17.1756 12.4475 17.5092 12.0322 17.7512C11.617 17.9932 11.2842 18.1042 11 18.1042V19.4792C11.6325 19.4792 12.2155 19.2362 12.7261 18.9383C13.2376 18.6395 13.7409 18.2453 14.2111 17.875L13.3595 16.7952Z" fill="#89898b"/>
+                          </svg>   
+                          <p class="label">120</p>                         
+                        </button>
+                        <button class="openComment">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.59195 15.304C2.34395 9.787 6.40296 3.75 12.36 3.75H12.681C14.8206 3.75053 16.8724 4.60072 18.3853 6.11365C19.8982 7.62658 20.7484 9.6784 20.749 11.818C20.7492 12.9976 20.5171 14.1657 20.0658 15.2556C19.6145 16.3454 18.9529 17.3357 18.1188 18.1698C17.2847 19.0039 16.2944 19.6655 15.2045 20.1168C14.1147 20.5681 12.9466 20.8003 11.767 20.8H3.94695C3.79158 20.8001 3.63999 20.752 3.51314 20.6623C3.38629 20.5725 3.29045 20.4456 3.23885 20.2991C3.18725 20.1525 3.18245 19.9935 3.2251 19.8441C3.26775 19.6947 3.35576 19.5622 3.47695 19.465L5.44795 17.882C5.4901 17.8482 5.52018 17.8018 5.5337 17.7495C5.54722 17.6972 5.54345 17.642 5.52295 17.592L4.59195 15.304ZM12.36 5.25C7.46695 5.25 4.13396 10.207 5.97995 14.738L6.91196 17.027C7.05396 17.3759 7.07957 17.7614 6.98498 18.126C6.89039 18.4907 6.68066 18.8151 6.38696 19.051L6.07796 19.3H11.767C12.7496 19.3003 13.7226 19.1069 14.6305 18.731C15.5384 18.3551 16.3633 17.804 17.0581 17.1092C17.7529 16.4143 18.304 15.5894 18.68 14.6815C19.0559 13.7737 19.2492 12.8006 19.249 11.818C19.2484 10.0762 18.5563 8.40593 17.3246 7.17431C16.093 5.94268 14.4227 5.25053 12.681 5.25H12.36Z" fill="#89898b"/>
+                          </svg>                        
+                          <p class="label">2件のコメントを表示</p>                                
+                        </button>
+                      </div>
+                    </div>
+                    <button class="replyBtn">
+                      返信
+                    </button>
+                  </div>
+                </div>
+                <!-- <div class="article-comment-reply">
+                  <div class="article-comment-reply-top">
+                    <div class="article-comment-reply-top-content">
+                      <div class="article-comment-reply-top-content-userData">
+                        <img src={blog.thumbnail.url} alt="" class="article-comment-reply-top-content-userData-img">
+                        <div class="article-comment-reply-top-content-userData-right">
+                          <a href="" class="article-comment-reply-top-content-userData-userId">tatsu22444</a>
+                          <p class="article-comment-reply-top-content-userData-time">
+                            <time datetime="">7</time>時間前
+                          </p>
+                        </div>
+                      </div>
+                      <p class="article-comment-reply-top-content-text">ここにユーザーのコメントが表示されます</p>
+                    </div>
+                    <ul class="article-comment-reply-top-iconList">
+                      <li class="article-comment-reply-top-iconList-item">
+                        <button class="article-comment-reply-top-iconList-item-btn">
+                          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 5.04165L10.505 5.51832C10.5692 5.58486 10.6461 5.63778 10.7311 5.67393C10.8162 5.71008 10.9076 5.72871 11 5.72871C11.0925 5.72871 11.1839 5.71008 11.269 5.67393C11.354 5.63778 11.4309 5.58486 11.495 5.51832L11 5.04165ZM8.64054 16.7952C7.25087 15.6997 5.73196 14.63 4.52654 13.2733C3.34587 11.9423 2.52087 10.3904 2.52087 8.37557H1.14587C1.14587 10.8194 2.16337 12.6839 3.49896 14.1863C4.80979 15.6622 6.48179 16.8447 7.78896 17.875L8.64054 16.7952ZM2.52087 8.37557C2.52087 6.40474 3.63462 4.75107 5.15537 4.05532C6.63304 3.37974 8.61854 3.55849 10.505 5.51832L11.495 4.5659C9.25837 2.24032 6.65871 1.85624 4.58337 2.80499C2.55387 3.73357 1.14587 5.88957 1.14587 8.37557H2.52087ZM7.78896 17.875C8.25921 18.2453 8.76337 18.6395 9.27396 18.9383C9.78454 19.2372 10.3675 19.4792 11 19.4792V18.1042C10.7159 18.1042 10.3822 17.9942 9.96787 17.7512C9.55262 17.5092 9.12271 17.1756 8.64054 16.7952L7.78896 17.875ZM14.2111 17.875C15.5183 16.8437 17.1903 15.6631 18.5011 14.1863C19.8367 12.683 20.8542 10.8194 20.8542 8.37557H19.4792C19.4792 10.3904 18.6542 11.9423 17.4735 13.2733C16.2681 14.63 14.7492 15.6997 13.3595 16.7952L14.2111 17.875ZM20.8542 8.37557C20.8542 5.88957 19.4471 3.73357 17.4167 2.80499C15.3414 1.85624 12.7435 2.24032 10.505 4.56499L11.495 5.51832C13.3815 3.5594 15.367 3.37974 16.8447 4.05532C18.3655 4.75107 19.4792 6.40382 19.4792 8.37557H20.8542ZM13.3595 16.7952C12.8774 17.1756 12.4475 17.5092 12.0322 17.7512C11.617 17.9932 11.2842 18.1042 11 18.1042V19.4792C11.6325 19.4792 12.2155 19.2362 12.7261 18.9383C13.2376 18.6395 13.7409 18.2453 14.2111 17.875L13.3595 16.7952Z" fill="#fff"/>
+                          </svg> 
+                          <p class="article-comment-reply-top-iconList-item-btn-label">123</p>
                         </button>
                       </li>
-                      <li class="article-comment-box-filterList-item">
-                        <button class="article-comment-box-filterList-btn">
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 9L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L5 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>        
+                      <li class="article-comment-reply-top-iconList-item">
+                        <button class="article-comment-reply-top-iconList-item-btn">
+                          <span class="article-comment-reply-top-iconList-item-btn-dot"></span>
+                          <span class="article-comment-reply-top-iconList-item-btn-dot"></span>
+                          <span class="article-comment-reply-top-iconList-item-btn-dot"></span>
                         </button>
                       </li>
                     </ul>
-                </div>
-              </div>
-              <div class="article-comment-replyBox">
-                <div class="article-comment-replyBox-to">
-                  <p class="article-comment-replyBox-to-text">
-                    <a href="" class="article-comment-replyBox-to-user">tatsu22444</a>
-                    さんに返信
-                  </p>
-                </div>
-                <input type="text" class="article-comment-replyBox-input">
-                <button class="article-comment-replyBox-btn">
-                  
-                </button>
+                  </div>
+                  <div class="article-comment-reply-inputBox">
+                    <input type="text" placeholder="あなたの意見を書く" class="input">
+                    <button class="btn">投稿</button>
+                  </div>
+                  <div class="article-comment-reply-listBox">
+                    <ol class="article-comment-reply-list">
+                      <li class="article-comment-reply-list-item">
+                        <div class="dots">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+                        <img src="" alt="" class="userIcon">
+                        <div class="article-comment-reply-list-item-middle">
+                          <a href="" class="userName">tatsu22444</a>
+                          <p class="opinion">ここにコメ主の意見のテキストが表示されます。</p>
+                        </div>
+                        <button class="article-comment-reply-list-item-btn">
+                          返信
+                        </button>
+                      </li>
+                      <li class="article-comment-reply-list-item">
+                        <div class="dots">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+                        <img src="" alt="" class="userIcon">
+                        <div class="article-comment-reply-list-item-middle">
+                          <a href="" class="userName">tatsu22444</a>
+                          <p class="opinion">ここにコメ主の意見のテキストが表示されます。</p>
+                        </div>
+                        <button class="article-comment-reply-list-item-btn">
+                          返信
+                        </button>
+                      </li>
+                    </ol>
+                  </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -445,24 +577,201 @@ import ArticleList from '../components/ArticleList.astro';
         background-color: #252528;
       }
 
+      &-label{
+        font-size: 16px;
+        font-weight: 500;
+        color: #252528;
+      }
+
       &-inner{
         width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 16px;
       }
 
       &-box{
-        width: 50%;
+        width: 100%;
+        margin-top: 16px;
+      }
 
-        &-header{
-          margin-top: 16px;
+      &-commentList{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        &-item{
           width: 100%;
+          position: relative;
           display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: space-between;
+          padding: 16px 8px;
+          border-radius: 8px;
+          border: 1px solid #89898b;
+
+        //   >.openComment{
+        //     position: absolute;
+        //     bottom: -11%;
+        //     left: 50%;
+        //     transform: translateX(-50%);
+        //     padding: 4px 12px;
+        //     border-radius: 100px;
+        //     font-size: 12px;
+        //     font-weight: 600;
+        //     color: #89898b;
+        //     border: 1px solid #89898b;
+        //     background-color: #ECEBF3;
+        //   }
+
+          >.img{
+            width: 40px;
+            height: 40px;
+            border-radius: 100px;
+          }
+
+          >.replyBtn{
+            display: flex;
+            align-items: center;
+            align-self: center;
+            padding: 8px 16px;
+            border-radius: 100px;
+            background-color: #252528;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+          }
+
+          &-body{
+            margin-left: 8px;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            
+            >.comment{
+              padding: 16px 0;
+              font-size: 16px;
+              font-weight: 500;
+              color: #252528;
+            }
+
+            &-header{
+              display: flex;
+              align-items: center;
+              gap: 8px;
+
+              >.userName{
+                font-size: 12px;
+                font-weight: 500;
+                color: #252528;
+                line-height: 1;
+                border-bottom: 1px solid #252528;
+              }
+
+              >.time{
+                color: #252528;
+                font-size: 12px;
+                font-weight: 500;
+              }
+
+              >.dots{
+                display: flex;
+                align-items: center;
+                margin-left: auto;
+                gap: 3px;
+                padding: 8px;
+
+                >.dot{
+                  width: 3px;
+                  height: 3px;
+                  border-radius: 100px;
+                  background-color: #252528;
+                }
+              }
+            }
+
+            &-footer{
+              width: 100%;
+              display: flex;
+              align-items: center;
+              gap: 16px;
+
+              >.openComment{
+                display: flex;
+                align-items: center;
+                gap: 4px;
+
+                >.label{
+                  font-size: 12px;
+                  font-weight: 600;
+                  color: #89898b;
+                  line-height: 1;
+                  border-bottom: 1px solid #89898b;
+                }
+              }
+            }
+
+            &-like{
+              display: flex;
+              align-items: center;
+              gap: 4px;
+
+              >.label{
+                font-size: 12px;
+                font-weight: 00;
+                color: #89898b;
+              }
+            }
+          }
+        }
+      }
+
+      &-main{
+        width: 50%;
+        border-right: 1px solid #595959;
+      }
+
+      &-inputBox{
+        display: flex;
+        align-items: center;
+        margin-top: 8px;
+        padding: 12px 8px;
+        border-radius: 8px;
+        border: 1px solid #252528;
+
+        &-userIcon{
+            width: 40px;
+            height: 40px;
+            border-radius: 100px;
+            object-fit: cover;
+        }
+
+        &-input{
+            max-width: 100%;
+          flex: 1;
+          padding-left: 8px;
+          font-size: 14px;
+          font-weight: 500;
+          color: #252528;
+        }
+
+        &-btn{
+          display: block;
+          padding: 8px 16px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #fff;
+          border-radius: 100px;
+          background-color: #252528;
+        }
+      }
+
+      &-header{
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &-filterLabel{
+          font-size: 16px;
+          font-weight: 600;
+          color: #252528;
         }
 
         &-filterList{
@@ -471,35 +780,118 @@ import ArticleList from '../components/ArticleList.astro';
           gap: 8px;
 
           &-item{
+            >.active{
+              border: 1px solid #252528;
+            }
           }
-
+          
           &-btn{
             display: flex;
             padding: 4px 8px;
             border-radius: 100px;
-            border: 1px solid #252528;
+          }
+        }
+      }
+
+      &-reply{
+        width: 50%;
+        // padding: 16px;
+
+        &-top{
+          width: 100%;
+
+          &-content{
+            width: 100%;
+
+            &-userData{
+              display: flex;
+              color: #fff;
+              gap: 8px;
+              padding: 16px;
+
+              &-img{
+                width: 32px;
+                height: 32px;
+                border-radius: 100px;
+              }
+
+              &-right{
+                display: flex;
+                flex: 1;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 12px;
+              }
+
+              &-userId{
+                line-height: 1;
+                border-bottom: 1px solid #fff;
+              }
+            }
+
+            &-text{
+              padding: 8px 0 16px 24px;
+              font-size: 14px;
+              font-weight: 500;
+              color: #fff;
+            }
+          }
+
+          &-iconList{
+            width: 100%;
+            padding: 8px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #595959;
+            border-bottom: 1px solid #595959;
+
+            &-item{
+                // width: 100%;
+              
+                &-btn{
+                  display: flex;
+                  align-items: center;
+                  gap: 4px;
+
+                  &-label{
+                    color: #fff;
+                    font-size: 12px;
+                  }
+                }
+
+                &-btn{
+                  display: flex;
+                  align-items: center;
+                  gap: 4px;
+
+                  &-dot{
+                    width: 3px;
+                    height: 3px;
+                    border-radius: 100px;
+                    background-color: #fff;
+                  }
+                }
+            }
           }
         }
 
-        &-filterLabel{
-            font-size: 14px;
-            font-weight: 600;
-            color: #252528;
+        &-inoutBox{
+          
         }
       }
 
-      &-label{
-        font-size: 16px;
-        font-weight: 500;
-        color: #252528;
-      }
 
-      &-replyBox{
-        width: 50%;
-        background-color: #252528;
-        height: 300px;
-        border-radius: 8px;
-      }
+    //   &-replyBox{
+    //     width: 50%;
+    //     background-color: #252528;
+    //     height: 300px;
+    //     border-radius: 8px;
+
+    //     &-to{
+    //       color: #fff;
+    //     }
+    //   }
     }
 
     &-ref{
@@ -654,12 +1046,15 @@ import ArticleList from '../components/ArticleList.astro';
 </style>
 
 <script>
-    // const pan_label = document.getElementById('js-pan-label')
-	// const str = pan_label.textContent
-	// const len = 24
-	// if(str.length > len) {
-	// 	pan_label.textContent = str.substring(0, len) + "..."
-	// }
+const pan_label = document.getElementById('js-pan-label');
+if (pan_label) {
+    const str = pan_label.textContent || ""; // textContentがnullの場合は空文字を代入
+    const len = 24;
+    if (str.length > len) {
+        pan_label.textContent = str.substring(0, len) + "...";
+    }
+}
+
 </script>
 
 <!-- 
