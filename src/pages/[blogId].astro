@@ -414,6 +414,22 @@ import ArticleList from '../components/ArticleList.astro';
 	font-size: 20px;
 	line-height: 1.6;
 
+  @media screen and (max-width:1120px) {
+      flex-direction: column;
+			gap: 80px;
+    }
+
+		@media screen and (max-width:834px) {
+			top: 0;
+      margin-inline: auto;
+			margin-top: 120px;
+			width: calc(100% - 48px);
+    }
+
+		@media screen and (max-width:440px) {
+			margin-top: 96px;
+    }
+
     &-inner{
 	  width: 100%;
       margin-inline: auto;
