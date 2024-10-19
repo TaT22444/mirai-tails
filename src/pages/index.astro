@@ -330,6 +330,10 @@ import ArticleList from '../components/ArticleList.astro';
 					padding: 8px 16px;
 					border-radius: 100px;
 					border: 1px solid #252528;
+
+					@media screen and (max-width:440px) {
+            padding: 6px 12px;
+          }
 				}
 
 				&-label{
@@ -346,8 +350,9 @@ import ArticleList from '../components/ArticleList.astro';
 		font-weight: 600;
 		color: #252528;
 
-		@media screen and (max-width:834px) {
-			padding: 16px 0;
+		@media screen and (max-width:440px) {
+      padding: 16px 0;
+			font-size: 24px;
     }
 	}
 
@@ -376,6 +381,10 @@ import ArticleList from '../components/ArticleList.astro';
 			&-link{
 				padding: 8px 16px;
 			  border-radius: 100px;
+
+				@media screen and (max-width:440px) {
+          padding: 6px 12px;
+        }
 			}
 
 			&-label{
@@ -401,6 +410,10 @@ import ArticleList from '../components/ArticleList.astro';
 
 			@media screen and (max-width:834px) {
         width: 100%;
+      }
+
+			@media screen and (max-width:440px) {
+        row-gap: 16px;
       }
 		}
 
@@ -451,6 +464,10 @@ import ArticleList from '../components/ArticleList.astro';
 				font-weight: 500;
 				color: #252528;
 				margin-top: 8px;
+
+				@media screen and (max-width:440px) {
+          font-size: 16px;
+        }
 			}
 
 			&-footer{
