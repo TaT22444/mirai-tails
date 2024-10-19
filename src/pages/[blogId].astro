@@ -82,6 +82,16 @@ import ArticleList from '../components/ArticleList.astro';
               </button>
             </div>
           </div>
+          <div class="article-ref">
+            <p class="article-ref-label">参照元</p>
+            <!-- <div class="article-ref-link" set:html={blog.article_ref_link} /> -->
+            <!-- <a href={blog.article_ref_link} class="article-ref-link">{blog.article_ref}</a> -->
+            <p class="article-ref-siteName">{blog.article_ref}</p>
+            <p class="article-ref-articleName">{blog.article_name}</p>
+            <!-- <a href={blog.article_link} class="article-ref-name-link">{blog.article_link}</a> -->
+            <div class="article-ref-link" set:html={blog.article_link} />
+            <p class="article-ref-summary">{blog.article_summary}</p>
+          </div>
           <div class="article-comment">
             <p class="article-comment-label">コメント</p>
             <div class="article-comment-inner">
@@ -259,16 +269,6 @@ import ArticleList from '../components/ArticleList.astro';
               </div>
             </div>
           </div>
-          <div class="article-ref">
-            <p class="article-ref-label">参照元</p>
-            <!-- <div class="article-ref-link" set:html={blog.article_ref_link} /> -->
-            <!-- <a href={blog.article_ref_link} class="article-ref-link">{blog.article_ref}</a> -->
-            <p class="article-ref-siteName">{blog.article_ref}</p>
-            <p class="article-ref-articleName">{blog.article_name}</p>
-            <!-- <a href={blog.article_link} class="article-ref-name-link">{blog.article_link}</a> -->
-            <div class="article-ref-link" set:html={blog.article_link} />
-            <p class="article-ref-summary">{blog.article_summary}</p>
-          </div>
         </section>
       </div>
     </article>
@@ -427,6 +427,7 @@ import ArticleList from '../components/ArticleList.astro';
     }
 
 		@media screen and (max-width:440px) {
+      width: calc(100% - 32px);
 			margin-top: 96px;
     }
 
@@ -510,6 +511,12 @@ import ArticleList from '../components/ArticleList.astro';
       font-weight: 600;
       line-height: 1.6;
       color: #252528;
+
+      @media screen and (max-width:440px) {
+        margin-top: 16px;
+        font-size: 20px;
+        line-height: 1.4;
+      }
     }
 
     &-text{
@@ -526,10 +533,18 @@ import ArticleList from '../components/ArticleList.astro';
       justify-content: space-between;
       margin-top: 40px;
 
+      @media screen and (max-width:440px) {
+        // justify-content: center;
+      }
+
       &-left{
         display: flex;
         align-items: center;
         gap: 16px;
+        
+        @media screen and (max-width:440px) {
+            gap: 8px;
+          }
 
         &-btn{
           display: flex;
@@ -538,6 +553,10 @@ import ArticleList from '../components/ArticleList.astro';
           padding: 8px 16px;
           border-radius: 100px;
           border: 1px solid #636366;
+
+          @media screen and (max-width:440px) {
+            padding: 6px 12px;
+          }
 
           &-icon{
             // width: px;
@@ -568,6 +587,10 @@ import ArticleList from '../components/ArticleList.astro';
             border-radius: 100px;
             border: 1px solid #252528;
 
+            @media screen and (max-width:440px) {
+            padding: 6px 12px;
+          }
+
             &-label{
               font-size: 12px;
               font-weight: 400;
@@ -582,7 +605,6 @@ import ArticleList from '../components/ArticleList.astro';
       margin-top: 40px;
       padding-top: 40px;
       width: 100%;
-      height: 1000px;
 
       &::after{
         content: "";
