@@ -1,4 +1,9 @@
 ---
+// function handleTagClick(tag: string) {
+// 	console.log(`Tag clicked: ${tag}`); // デバッグ用
+//     const event = new CustomEvent('tag-selected', { detail: { tag } });
+//     window.dispatchEvent(event);
+// }
 interface Props {
 	title: string;
 	URL?: string;
@@ -8,6 +13,8 @@ interface Props {
 	description?: string;
 	sns_img?: string;
 }
+
+
 const { URL } = Astro.props
 const { href} = Astro.props
 const {ogptitle} = Astro.props
@@ -32,7 +39,9 @@ const { title } = Astro.props;
 	  <meta name="description" content={ description } />
 	  <meta property="og:type" content={type}>
     <meta property="og:image" content={sns_img} />
-		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@600&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans:ital,wght@1,100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css" rel="stylesheet"/>
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
@@ -41,10 +50,71 @@ const { title } = Astro.props;
 		<header class="header">
 			<h1 class="header-logo">
 				<a href="" class="header-logo-link">
-					<span class="header-logo--main">ミラテル</span>
+					<span class="header-logo--main">Miratel</span>
 					<span class="header-logo--sub">AI未来洞察</span>
 				</a>
 			</h1>
+			<div class="header-aside">
+				<div class="header-aside-box">
+					<h3 class="header-aside-label">知る</h3>
+					<ul class="header-aside-linkList">
+						<li class="header-aside-linkList-item">
+							<a href="#" class="header-aside-linkList-item-link active">
+								<span class="header-aside-linkList-item-link-label active">記事トップ</span>
+								<!-- <span class="header-aside-linkList-item-link-arrow">→</span> -->
+							</a>
+						</li>
+						<li class="header-aside-linkList-item">
+							<a href="#" class="header-aside-linkList-item-link">
+								<span class="header-aside-linkList-item-link-label">ミラテルとは</span>
+								<span class="header-aside-linkList-item-link-arrow">→</span>
+							</a>
+						</li>
+						<li class="header-aside-linkList-item">
+							<a href="#" class="header-aside-linkList-item-link">
+								<span class="header-aside-linkList-item-link-label">ミラテルの使い方</span>
+								<span class="header-aside-linkList-item-link-arrow">→</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="header-aside-box">
+					<h3 class="header-aside-label">記事を探す</h3>
+					<search class="header-aside-search">
+						<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M14.0001 13.9999L11.1048 11.1046M11.1048 11.1046C11.6001 10.6093 11.9929 10.0213 12.261 9.37426C12.529 8.72717 12.6669 8.03363 12.6669 7.33323C12.6669 6.63283 12.529 5.93928 12.261 5.2922C11.9929 4.64511 11.6001 4.05715 11.1048 3.56189C10.6095 3.06663 10.0216 2.67377 9.3745 2.40574C8.72742 2.13771 8.03387 1.99976 7.33347 1.99976C6.63307 1.99976 5.93953 2.13771 5.29244 2.40574C4.64535 2.67377 4.0574 3.06663 3.56214 3.56189C2.56192 4.56211 2 5.9187 2 7.33323C2 8.74775 2.56192 10.1043 3.56214 11.1046C4.56236 12.1048 5.91895 12.6667 7.33347 12.6667C8.748 12.6667 10.1046 12.1048 11.1048 11.1046Z" stroke="#ECEBF3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>			
+						<input class="header-aside-search-input" type="text" placeholder="キーワードで検索">					
+					</search>
+
+					<ul class="header-aside-tagList">
+						{["Technology", "Society", "Energy", "Environment", "Education", "Economy"].map(
+							(tag) => (
+								<li class="header-aside-tagList-item">
+									<button
+										class="header-aside-tagList-item-link"
+										type="button"
+										data-tag={tag}
+									>
+										{tag}
+									</button>
+								</li>
+							)
+						)}
+					</ul>
+				</div>
+				<div class="header-aside-user">
+					<a href="" class="header-aside-userIcon">
+						<svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M10 10C10 8.4087 10.6321 6.88258 11.7574 5.75736C12.8826 4.63214 14.4087 4 16 4C17.5913 4 19.1174 4.63214 20.2426 5.75736C21.3679 6.88258 22 8.4087 22 10C22 11.5913 21.3679 13.1174 20.2426 14.2426C19.1174 15.3679 17.5913 16 16 16C14.4087 16 12.8826 15.3679 11.7574 14.2426C10.6321 13.1174 10 11.5913 10 10ZM6 28V27C6 24.6131 6.94821 22.3239 8.63604 20.636C10.3239 18.9482 12.6131 18 15 18H17C19.3869 18 21.6761 18.9482 23.364 20.636C25.0518 22.3239 26 24.6131 26 27V28H6Z" fill="#252528"/>
+						</svg>							
+					</a>
+					<p class="header-aside-user-name">ゲストユーザー</p>
+					<svg width="6" height="14" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M1 1L8.29289 8.29289C8.68342 8.68342 8.68342 9.31658 8.29289 9.70711L0.999999 17" stroke="#fff" stroke-linecap="round"/>
+					</svg>						
+				</div>
+			</div>
 			<div class="sp-header">
 				<search class="sp-header-search">
 					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +124,7 @@ const { title } = Astro.props;
 				</search>
 				<h1 class="sp-header-logo">
 					<a href="" class="sp-header-logo-link">
-						<span class="sp-header-logo--main">ミラテル</span>
+						<span class="sp-header-logo--main">Miratel</span>
 						<span class="sp-header-logo--sub">AI未来洞察</span>
 					</a>
 				</h1>
@@ -65,8 +135,8 @@ const { title } = Astro.props;
 				</div>
 			</div>
 		</header>
-		<div class="container">
-			<aside class="aside">
+		<!-- <div class="container"> -->
+			<!-- <aside class="aside">
 				<div class="aside-inner">
 					<div class="aside-box">
 						<h3 class="aside-label">知る</h3>
@@ -123,9 +193,9 @@ const { title } = Astro.props;
 						<p class="aside-user-name">ゲストユーザー</p>
 					</div>
 				</div>
-			</aside>
+			</aside> -->
 		  <slot />
-		</div>
+		<!-- </div> -->
 	</body>
 </html>
 <style lang="scss" is:global>
@@ -156,18 +226,24 @@ const { title } = Astro.props;
 			Courier New,
 			monospace;
 	}
+	// --font-family-ja: 'Noto Sans JP', sans-serif;
+  //   --font-family-en: 'Dela Gothic One', cursive;
 
 	.header{
 		position: fixed;
-		top: 32px;
-		left: 24px;
+		height: 100dvh;
+		padding: 40px 0 0 0;
 		z-index: 99;
+		background-color: #252528;
 
 		@media screen and (max-width:834px) {
         width: 100%;
-				top: 0;
-				left: 0;
-				padding: 16px 16px 0;
+				height: auto;
+				max-width: calc(100% - 32px);
+				top: 16px;
+				left: 16px;
+				padding: 0;
+				border-radius: 100px;
       }
 
 		@media screen and (max-width:834px) {
@@ -175,28 +251,27 @@ const { title } = Astro.props;
     }
 
 		&-logo{
-			// border: 1px solid #252528;
-			background-color: #252528;
-			border-radius: 100px;
+			margin-left: 16px;
 			
 			@media screen and (max-width:834px) {
         display: none;
       }
-			// font-family: 'Noto Sans JP', sans-serif;
-			
 
 			&-link{
 				display: flex;
 			  align-items: flex-end;
-			  justify-content: center;
 			  gap: 8px;
-			  padding: 12px 24px;
+				// border: 1px solid #fff;
+			  // padding: 8px 16px;
+			  border-radius: 100px;
 			}
 
 			&--main{
-				font-size: 18px;
-				font-weight: 600;
+				font-size: 20px;
+				font-weight: 500;
 				color: #fff;
+				letter-spacing: .05em;
+				font-family: 'Dela Gothic One', cursive;
 			}
 
 			&--sub{
@@ -205,6 +280,138 @@ const { title } = Astro.props;
 				color: #fff;
 				line-height: 1.6;
 			}
+		}
+
+		&-aside{
+			width: 100%;
+			height: 100%;
+			padding: 24px;
+			display: flex;
+			flex-direction: column;
+			gap: 40px;
+
+			@media screen and (max-width:834px) {
+        display: none;
+      }
+
+			&-box{
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+
+			&:first-of-type{
+				margin-top: 40px;
+			}
+		}
+
+		&-label{
+			font-size: 12px;
+			color: #fff;
+		}
+
+		&-linkList{
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+
+			&-item{
+
+				>.active{
+					padding: 8px 16px;
+					border-radius: 100px;
+					// border: 1px solid #bdbdbd;
+					background-color: #fff;
+				}
+
+				&-link{
+					display: inline-block;
+					padding-left: 8px;
+					// padding: 8px 16px;
+					// border: 1px solid #cdcdcd;
+					// border-radius: 100px;
+
+					>.active{
+						color: #252528;
+						font-weight: 600;
+					}
+
+					&-label{
+						font-size: 12px;
+						color: #fff;
+					}
+
+					&-arrow{
+						color: #fff;
+					}
+				}
+			}
+		}
+
+		&-search{
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			padding: 10px 16px;
+			border-radius: 100px;
+			border: 1px solid #fff;
+
+			&-input{
+				font-size: 12px;
+				color: #bdbdbd;
+			}
+		}
+
+		&-tagList{
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+
+			&-item{
+				position: relative;
+				padding: 8px;
+
+			// 	&::after{
+			// 	content: "";
+			// 	position: absolute;
+			// 	top: 50%;
+			// 	left: -12px;
+			// 	transform: translateY(-50%);
+			// 	width: 4px;
+			// 	height: 4px;
+			// 	border-radius: 100px;
+			// 	background-color: rgb(255, 255, 255);
+			// }
+
+				&-link{
+					display: block;
+					font-size: 12px;
+					color: #fff;
+				}
+			}
+		}
+
+		&-user{
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			margin-top: auto;
+			margin-bottom: 24px;
+
+			&Icon{
+			position: relative;
+			display: inline-flex;
+			align-self: flex-start;
+			padding: 8px;
+			border-radius: 100px;
+			background-color: #ECEBF3;
+		  }
+
+		  &-name{
+			  font-size: 12px;
+				color: #bdbdbd;
+				margin-right: auto;
+			}
+		}
 		}
 	}
 
@@ -246,7 +453,7 @@ const { title } = Astro.props;
 				
 				&-link{
 					display: flex;
-					align-items: center;
+					align-items: flex-end;
 					gap: 8px;
 				}
 
@@ -254,6 +461,7 @@ const { title } = Astro.props;
 					font-size: 20px;
 					font-weight: 600;
 					color: #fff;
+					font-family: 'Dela Gothic One', cursive;
 				}
 
 				&--sub{
@@ -290,9 +498,9 @@ const { title } = Astro.props;
 	.aside{
 		// width: 20vw;
 		max-width: 280px;
-		position: fixed;
-		top: 104px;
-		left: 24px;
+		// position: fixed;
+		// top: 104px;
+		// left: 24px;
 		padding: 24px 24px;
 		border-radius: 32px;
 		background-color: #252528;

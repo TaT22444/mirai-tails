@@ -2,18 +2,34 @@
 import { getBlogs} from '../library/microcms'
 const response = await getBlogs({ fields: ["id", "title", "thumbnail", "tag", "publishedAt", "article_name", "article_summary", "article_link"] })
 
+interface Article {
+  id: string;
+  title: string;
+  thumbnail: { url: string };
+  tag: string;
+  publishedAt: string;
+}
+
+let visibleCount = 3; // 最初に表示する記事数
+
+const showMore = () => {
+  visibleCount += 3; // 3件ずつ増やす
+};
+
 ---
-<ul class="article-list">
-  {response.contents.map((content =>
+<ul class="article-list" id="article-list">
+  {response.contents.slice(0, visibleCount).map((content =>
     <li class="article-item">
       <a href={"../"+content.id} class="article-item-link">
         <img class="article-item-img"  src={content.thumbnail.url} alt="" />
         <ul class="article-item-tagList">
           <li class="article-item-tagList-item">{content.tag}</li>
+					<li class="article-item-tagList-item"><p class="article-item-timestamp"><time class="article-item-timestamp-label" datetime="">{content.publishedAt.substring(0, 10)}</time></p></li>
         </ul>
         <h3 class="article-item-title">{content.title}</h3>
         <div class="article-item-footer">
-          <ul class="article-item-iconList">
+					<div class="article-item-footer-span"></div>
+          <ul class="article-item-iconList prot">
             <li class="article-item-iconList-item">
               <svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11 5.04165L10.505 5.51832C10.5692 5.58486 10.6461 5.63778 10.7311 5.67393C10.8162 5.71008 10.9076 5.72871 11 5.72871C11.0925 5.72871 11.1839 5.71008 11.269 5.67393C11.354 5.63778 11.4309 5.58486 11.495 5.51832L11 5.04165ZM8.64054 16.7952C7.25087 15.6997 5.73196 14.63 4.52654 13.2733C3.34587 11.9423 2.52087 10.3904 2.52087 8.37557H1.14587C1.14587 10.8194 2.16337 12.6839 3.49896 14.1863C4.80979 15.6622 6.48179 16.8447 7.78896 17.875L8.64054 16.7952ZM2.52087 8.37557C2.52087 6.40474 3.63462 4.75107 5.15537 4.05532C6.63304 3.37974 8.61854 3.55849 10.505 5.51832L11.495 4.5659C9.25837 2.24032 6.65871 1.85624 4.58337 2.80499C2.55387 3.73357 1.14587 5.88957 1.14587 8.37557H2.52087ZM7.78896 17.875C8.25921 18.2453 8.76337 18.6395 9.27396 18.9383C9.78454 19.2372 10.3675 19.4792 11 19.4792V18.1042C10.7159 18.1042 10.3822 17.9942 9.96787 17.7512C9.55262 17.5092 9.12271 17.1756 8.64054 16.7952L7.78896 17.875ZM14.2111 17.875C15.5183 16.8437 17.1903 15.6631 18.5011 14.1863C19.8367 12.683 20.8542 10.8194 20.8542 8.37557H19.4792C19.4792 10.3904 18.6542 11.9423 17.4735 13.2733C16.2681 14.63 14.7492 15.6997 13.3595 16.7952L14.2111 17.875ZM20.8542 8.37557C20.8542 5.88957 19.4471 3.73357 17.4167 2.80499C15.3414 1.85624 12.7435 2.24032 10.505 4.56499L11.495 5.51832C13.3815 3.5594 15.367 3.37974 16.8447 4.05532C18.3655 4.75107 19.4792 6.40382 19.4792 8.37557H20.8542ZM13.3595 16.7952C12.8774 17.1756 12.4475 17.5092 12.0322 17.7512C11.617 17.9932 11.2842 18.1042 11 18.1042V19.4792C11.6325 19.4792 12.2155 19.2362 12.7261 18.9383C13.2376 18.6395 13.7409 18.2453 14.2111 17.875L13.3595 16.7952Z" fill="#636366"/>
@@ -35,16 +51,27 @@ const response = await getBlogs({ fields: ["id", "title", "thumbnail", "tag", "p
   ))}
 </ul>
 
+{visibleCount < response.contents.length && (
+  <button class="show-more-button">
+    もっと見る
+  </button>
+)}
+
 <style lang="scss">
+.prot{
+	display: none;
+}
+
 .article{
 		// margin-top: 16px;
-		// width: 100%;
+		width: 100%;
 
 		@media screen and (max-width:834px) {
 			// margin-top: 16px;
     }
 
 		&-list{
+			width: 100%;
 			display: flex;
 			flex-wrap: wrap;
 			column-gap: 24px;
@@ -63,7 +90,7 @@ const response = await getBlogs({ fields: ["id", "title", "thumbnail", "tag", "p
 			width: calc((100% - 88px) / 3);
 
 			@media screen and (max-width:1512px) {
-        width: calc((100% - 64px) / 2);
+        width: calc((100% - 24px) / 2);
       }
 
 			@media screen and (max-width:834px) {
@@ -91,6 +118,7 @@ const response = await getBlogs({ fields: ["id", "title", "thumbnail", "tag", "p
 
 			&-tagList{
 				display: flex;
+				justify-content: space-between;
 				gap: 16px;
 				margin-top: 8px;
 
@@ -102,7 +130,7 @@ const response = await getBlogs({ fields: ["id", "title", "thumbnail", "tag", "p
 			}
 
 			&-title{
-				font-size: 20px;
+				font-size: 18px;
 				font-weight: 500;
 				color: #252528;
 				margin-top: 8px;
@@ -113,14 +141,23 @@ const response = await getBlogs({ fields: ["id", "title", "thumbnail", "tag", "p
 			}
 
 			&-footer{
-				display: flex;
+				display: none;
+				// display: flex;
 				justify-content: space-between;
 				align-items: center;
-				margin-top: 8px;
+				// margin-top: 8px;
+
+				&-span{
+					display: none;
+					width: 70%;
+					height: 1px;
+					// background-color: #636366;
+				}
 			}
 
 			&-iconList{
-				display: flex;
+				// display: flex;
+				display: none;
 				align-items: center;
 				gap: 16px;
 
@@ -148,3 +185,4 @@ const response = await getBlogs({ fields: ["id", "title", "thumbnail", "tag", "p
 		}
 	}
 </style>
+

@@ -1,3 +1,7 @@
 {
-  "extends": "astro/tsconfigs/strict"
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "react-jsx", // JSXの設定を追加
+    "types": ["@types/react", "@types/react-dom"], // 型宣言の追加
+  }
 }
