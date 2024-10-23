@@ -26,8 +26,8 @@ const showMore = () => {
           <li class="article-item-tagList-item">{content.tag}</li>
 					<li class="article-item-tagList-item"><p class="article-item-timestamp"><time class="article-item-timestamp-label" datetime="">{content.publishedAt.substring(0, 10)}</time></p></li>
         </ul>
-        <h3 class="article-item-title">{content.title}</h3>
-        <div class="article-item-footer">
+				<h3 class="article-item-title">{content.title}</h3>
+        {/* <div class="article-item-footer">
 					<div class="article-item-footer-span"></div>
           <ul class="article-item-iconList prot">
             <li class="article-item-iconList-item">
@@ -44,7 +44,7 @@ const showMore = () => {
             </li>
           </ul>
           <p class="article-item-timestamp"><time class="article-item-timestamp-label" datetime="">{content.publishedAt.substring(0, 10)}</time></p>
-        </div>
+        </div> */}
       </a>
     </li>
 
@@ -87,10 +87,11 @@ const showMore = () => {
 		}
 
 		&-item{
+			position: relative;
 			width: calc((100% - 88px) / 3);
 
 			@media screen and (max-width:1512px) {
-        width: calc((100% - 24px) / 2);
+        width: calc((100% - 48px) / 2);
       }
 
 			@media screen and (max-width:834px) {
@@ -130,6 +131,7 @@ const showMore = () => {
 			}
 
 			&-title{
+				position: relative;
 				font-size: 18px;
 				font-weight: 500;
 				color: #252528;
@@ -137,16 +139,37 @@ const showMore = () => {
 
 				@media screen and (max-width:440px) {
           // font-size: 20px;
-					margin-top: 0;
+					margin-top: 4px;
         }
+
+
+			// &::after{
+			// 	content: "記事を見る →";
+			// 	position: absolute;
+			// 	left: 0;
+			// 	bottom: -48px;
+			// 	padding: 8px 16px;
+			// 	color: #252528;
+			// 	display: flex;
+			// 	align-items: center;
+			// 	justify-content: center;
+			// 	font-size: 12px;
+			// 	border-radius: 100px;
+			// 	// background-color: #98989b;
+			// 	border: 1px solid #252528;
+			// }
+
 			}
 
 			&-footer{
-				display: none;
-				// display: flex;
+				// display: none;
+				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				// margin-top: 8px;
+				margin-top: 8px;
+				@media screen and (max-width:440px) {
+					margin-top: 4px;
+        }
 
 				&-span{
 					display: none;
@@ -157,8 +180,8 @@ const showMore = () => {
 			}
 
 			&-iconList{
-				// display: flex;
-				display: none;
+				display: flex;
+				// display: none;
 				align-items: center;
 				gap: 16px;
 

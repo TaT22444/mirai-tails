@@ -1,5 +1,6 @@
 ---
 import { getBlogs, getBlogDetail } from '../library/microcms'
+import { fetchComments } from '../server/fetchTweets';
 const response2 = await getBlogs({ fields: ["id", "title", "thumbnail", "tag", "publishedAt","article_ref","article_ref_link", "article_name", "article_summary", "article_link"] })
 export async function getStaticPaths(){
     const response = await getBlogs({fields: ["id"]})
@@ -13,8 +14,6 @@ const { blogId } = Astro.params;
 const blog = await getBlogDetail(blogId);
 const blog_url = "https://miratel.netlify.app/"+blog.id+"/"
 const sns_share = "https://twitter.com/share?url="+blog_url+"&text="+blog.title
-                             
-
 
 import Layout from '../layouts/Layout.astro';
 import ArticleList from '../components/ArticleList.astro';
@@ -108,9 +107,9 @@ import ArticleList from '../components/ArticleList.astro';
               <div class="article-comment-inputBox">
                 <img src={blog.thumbnail.url} alt="" class="article-comment-inputBox-userIcon">
                 <textarea placeholder="あなたの意見を書く" class="article-comment-inputBox-input"></textarea>
-                <button class="article-comment-inputBox-btn">
+                <button class="article-comment-inputBox-btn" onclick="redirectToTwitterComment()">
                   <p class="article-comment-inputBox-btn-label">投稿</p>
-                </button>
+                </button>                
               </div>
               <div class="article-comment-header">
                     <p class="article-comment-header-filterLabel">注目順</p>
@@ -1177,56 +1176,19 @@ if (pan_label) {
 
 </script>
 
-<!-- 
-<script>
-    const pan_label = document.getElementById('js-pan-label')
-	const str = pan_label.textContent
-	const len = 16
-	if(str.length > len) {
-		pan_label.textContent = str.substring(0, len) + "..."
-	}
+<script type="module" defer>
+  document.addEventListener("DOMContentLoaded", () => {
+    const redirectToTwitterComment = () => {
+      const articleURL = window.location.href;
+      const tweetText = encodeURIComponent("この記事へのコメント:");
+      const twitterURL = `https://twitter.com/intent/tweet?text=${tweetText}&url=${articleURL}&hashtags=ブログコメント`;
 
-    document.querySelectorAll('#js-article__text').forEach((article_text)=>{
-        const hTag = article_text.querySelectorAll('h2')
-        // const article_list = document.getElementById('js-article-list')
-        document.querySelectorAll('#js-article-list').forEach((article_list)=>{
-        let h2Count = 1
-        // console.log(artile_list)
-        for (let i = 0; i < hTag.length; i++) {
-            const hTagElem = hTag[i]
-            if (hTagElem.tagName == "H2") {
-                const aside_li = document.createElement("li")
-                const aside_aTag = document.createElement("a")
-                const aside_Nestlist = document.createElement("ol")
-                // aside_Nestlist.classList = `article_list${h2Count}`
-                aside_aTag.textContent = hTagElem.textContent
-                aside_aTag.href = "#"+hTagElem.id;
-                article_list.appendChild(aside_li)
-                aside_li.appendChild(aside_aTag)
-                aside_li.appendChild(aside_Nestlist)
-                aside_aTag.classList.add("article-aside__link")
-                h2Count++
+      window.open(twitterURL, "_blank");
+    };
 
-                // console.log(hTag[1])
-
-                window.addEventListener('scroll', ()=>{
-                    if(hTagElem.getBoundingClientRect().top < 280) {
-                        aside_aTag.classList.add("article-aside__link--in")
-                        aside_aTag.classList.remove("article-aside__link--out")
-                    } else {
-                        aside_aTag.classList.add("article-aside__link--out")
-                        aside_aTag.classList.remove("article-aside__link--in")
-                    }
-                })
-
-            } else {
-                // const aside_li = document.createElement("li")
-                const aside_aTag = document.createElement("a")
-                aside_aTag.textContent = hTagElem.textContent
-                aside_aTag.href = "#"+hTagElem.id;
-                // const aside_Nestlist = document.querySelector(`.artile_list${h2Count-1}`)
-            }
-        }
-    })
-    })
-</script> -->
+    const tweetButton = document.querySelector(".article-comment-inputBox-btn");
+    if (tweetButton) {
+      tweetButton.addEventListener("click", redirectToTwitterComment);
+    }
+  });
+</script>
