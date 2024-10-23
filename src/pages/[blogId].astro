@@ -15,6 +15,14 @@ const blog = await getBlogDetail(blogId);
 const blog_url = "https://miratel.netlify.app/"+blog.id+"/"
 const sns_share = "https://twitter.com/share?url="+blog_url+"&text="+blog.title
 
+// コメントを取得
+let comments = [];
+try {
+  comments = await fetchComments(blog_url);
+} catch (error) {
+  console.error('コメントの取得に失敗しました:', error);
+}
+
 import Layout from '../layouts/Layout.astro';
 import ArticleList from '../components/ArticleList.astro';
 ---
@@ -111,6 +119,18 @@ import ArticleList from '../components/ArticleList.astro';
                   <p class="article-comment-inputBox-btn-label">投稿</p>
                 </button>                
               </div>
+              {comments.length > 0 ? (
+                <div class="article-comment-list">
+                  {comments.map((comment: { text: unknown; author_id: unknown; }) => (
+                    <div class="article-comment-item">
+                      <p class="comment-text">{comment.text}</p>
+                      <p class="comment-author">by {comment.author_id}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p>コメントはまだありません。</p>
+              )}
               <div class="article-comment-header">
                     <p class="article-comment-header-filterLabel">注目順</p>
                     <ul class="article-comment-header-filterList">
