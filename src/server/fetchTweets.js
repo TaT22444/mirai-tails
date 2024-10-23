@@ -9,5 +9,7 @@ export async function fetchComments(articleUrl) {
     }
   );
   const data = await response.json();
+  console.log(data); // デバッグ用
   return data.data || [];
+  
 }

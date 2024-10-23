@@ -119,18 +119,19 @@ import ArticleList from '../components/ArticleList.astro';
                   <p class="article-comment-inputBox-btn-label">投稿</p>
                 </button>                
               </div>
-              {comments.length > 0 ? (
-                <div class="article-comment-list">
-                  {comments.map((comment: { text: unknown; author_id: unknown; }) => (
-                    <div class="article-comment-item">
+              <div class="article-comment-list">
+                {comments && comments.length > 0 ? (
+                  comments.map((comment: { id: any; text: unknown; author_id: unknown; }) => (
+                    <div class="article-comment-item" data-key={comment.id}>
                       <p class="comment-text">{comment.text}</p>
                       <p class="comment-author">by {comment.author_id}</p>
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <p>コメントはまだありません。</p>
-              )}
+                  ))
+                ) : (
+                  <p>コメントはまだありません。</p>
+                )}
+              </div>
+              
               <div class="article-comment-header">
                     <p class="article-comment-header-filterLabel">注目順</p>
                     <ul class="article-comment-header-filterList">
