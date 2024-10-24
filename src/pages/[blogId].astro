@@ -115,7 +115,7 @@ import ArticleList from '../components/ArticleList.astro';
               <div class="article-comment-inputBox">
                 <img src={blog.thumbnail.url} alt="" class="article-comment-inputBox-userIcon">
                 <textarea placeholder="あなたの意見を書く" class="article-comment-inputBox-input"></textarea>
-                <button class="article-comment-inputBox-btn" onclick="redirectToTwitterComment()">
+                <button class="article-comment-inputBox-btn">
                   <p class="article-comment-inputBox-btn-label">投稿</p>
                 </button>                
               </div>
@@ -1198,18 +1198,19 @@ if (pan_label) {
 </script>
 
 <script type="module" defer>
-  document.addEventListener("DOMContentLoaded", () => {
-    const redirectToTwitterComment = () => {
-      const articleURL = window.location.href;
-      const tweetText = encodeURIComponent("この記事へのコメント:");
-      const twitterURL = `https://twitter.com/intent/tweet?text=${tweetText}&url=${articleURL}&hashtags=ブログコメント`;
+ document.addEventListener("DOMContentLoaded", () => {
+  const redirectToTwitterComment = () => {
+    const articleURL = window.location.href;
+    const tweetText = encodeURIComponent("この記事へのコメント:");
+    const twitterURL = `https://twitter.com/intent/tweet?text=${tweetText}&url=${articleURL}&hashtags=ブログコメント`;
 
-      window.open(twitterURL, "_blank");
-    };
+    window.open(twitterURL, "_blank");
+  };
 
-    const tweetButton = document.querySelector(".article-comment-inputBox-btn");
-    if (tweetButton) {
-      tweetButton.addEventListener("click", redirectToTwitterComment);
-    }
-  });
+  const tweetButton = document.querySelector(".article-comment-inputBox-btn");
+  if (tweetButton) {
+    tweetButton.addEventListener("click", redirectToTwitterComment);
+  }
+});
+
 </script>
