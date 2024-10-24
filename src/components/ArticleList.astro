@@ -19,7 +19,7 @@ const showMore = () => {
 ---
 <ul class="article-list" id="article-list">
   {response.contents.slice(0, visibleCount).map((content =>
-    <li class="article-item">
+    <li class="article-item" data-tag={content.tag}>
       <a href={"../"+content.id} class="article-item-link">
         <img class="article-item-img"  src={content.thumbnail.url} alt="" />
         <ul class="article-item-tagList">

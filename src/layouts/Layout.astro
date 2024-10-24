@@ -88,20 +88,25 @@ const { title } = Astro.props;
 					</search>
 
 					<ul class="header-aside-tagList">
-						{["Technology", "Society", "Energy", "Environment", "Education", "Economy"].map(
-							(tag) => (
-								<li class="header-aside-tagList-item">
-									<button
-										class="header-aside-tagList-item-link"
-										type="button"
-										data-tag={tag}
-									>
-										{tag}
-									</button>
-								</li>
-							)
-						)}
-					</ul>
+						<li class="header-aside-tagList-item">
+							<button class="header-aside-tagList-item-link" type="button" data-tag="Technology">Technology</button>
+						</li>
+						<li class="header-aside-tagList-item">
+							<button class="header-aside-tagList-item-link" type="button" data-tag="Society">Society</button>
+						</li>
+						<li class="header-aside-tagList-item">
+							<button class="header-aside-tagList-item-link" type="button" data-tag="Energy">Energy</button>
+						</li>
+						<li class="header-aside-tagList-item">
+							<button class="header-aside-tagList-item-link" type="button" data-tag="Environment">Environment</button>
+						</li>
+						<li class="header-aside-tagList-item">
+							<button class="header-aside-tagList-item-link" type="button" data-tag="Education">Education</button>
+						</li>
+						<li class="header-aside-tagList-item">
+							<button class="header-aside-tagList-item-link" type="button" data-tag="Economy">Economy</button>
+						</li>
+					</ul>					
 				</div>
 				<div class="header-aside-user">
 					<a href="" class="header-aside-userIcon">

@@ -313,7 +313,7 @@ const articles = response.contents;
 
 	.search-word{
 		padding: 8px 0 8px;
-		font-size: 32px;
+		font-size: 40px;
 		font-weight: 600;
 		color: #252528;
 
@@ -563,3 +563,34 @@ const articles = response.contents;
 		}
 	}
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tagButtons = document.querySelectorAll<HTMLButtonElement>('.header-aside-tagList-item-link');
+    const articles = document.querySelectorAll<HTMLLIElement>('.article-item');
+    const searchWordElement = document.querySelector<HTMLHeadingElement>('.search-word'); // h2の要素取得
+
+    tagButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const selectedTag = button.getAttribute('data-tag');
+
+        // タイトルを変更
+        if (searchWordElement && selectedTag) {
+          searchWordElement.textContent = `${selectedTag}`;
+        }
+
+        // すべてのタグを非表示
+        articles.forEach((article) => {
+          (article as HTMLElement).style.display = 'none';
+        });
+
+        // 選択されたタグの記事を表示
+        articles.forEach((article) => {
+          if (article.getAttribute('data-tag') === selectedTag) {
+            (article as HTMLElement).style.display = 'block';
+          }
+        });
+      });
+    });
+  });
+</script>
