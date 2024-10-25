@@ -217,7 +217,8 @@ const articles = response.contents;
 		z-index: 99;
 
 		@media screen and (max-width:834px) {
-			display: none;
+			// display: none;
+			top: 88px;
     }
 
 		&-list{
@@ -276,6 +277,7 @@ const articles = response.contents;
 
 		@media screen and (max-width:834px) {
 			display: block;
+			margin-top: 64px;
     }
 
 		&-label{
@@ -607,7 +609,7 @@ const articles = response.contents;
 
         // タイトルをカテゴリ名に変更
         if (searchWordElement && selectedCategory) {
-          searchWordElement.textContent = `${selectedCategory} に関する記事`;
+          searchWordElement.textContent = `${selectedCategory}`;
         }
 
         // すべての記事を非表示
