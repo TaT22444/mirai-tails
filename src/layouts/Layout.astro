@@ -201,6 +201,21 @@ const { title } = Astro.props;
 			</aside> -->
 		  <slot />
 		<!-- </div> -->
+
+		<script type="module" defer>
+			document.addEventListener("DOMContentLoaded", () => {
+				const tagButtons = document.querySelectorAll(".header-aside-tagList-item-link");
+				tagButtons.forEach((button) => {
+					button.addEventListener("click", () => {
+						const tag = button.dataset.tag;
+						console.log(`Tag clicked: ${tag}`); // デバッグ用
+						const event = new CustomEvent("tag-selected", { detail: { tag } });
+						window.dispatchEvent(event);
+					});
+				});
+			});
+		</script>
+		
 	</body>
 </html>
 <style lang="scss" is:global>
