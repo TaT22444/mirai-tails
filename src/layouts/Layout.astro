@@ -1,27 +1,19 @@
 ---
-// function handleTagClick(tag: string) {
-// 	console.log(`Tag clicked: ${tag}`); // デバッグ用
-//     const event = new CustomEvent('tag-selected', { detail: { tag } });
-//     window.dispatchEvent(event);
-// }
+import PanList from '../components/PanList.astro';
+
 interface Props {
-	title: string;
-	URL?: string;
-	href?: string;
-	ogptitle?: string;
-	type?: string;
-	description?: string;
-	sns_img?: string;
+  title: string;
+  URL?: string;
+  href?: string;
+  ogptitle?: string;
+  type?: string;
+  description?: string;
+  sns_img?: string;
+  paths: { label: string; url: string }[];
 }
 
+const { title, URL, ogptitle, type, description, sns_img, paths } = Astro.props;
 
-const { URL } = Astro.props
-const { href} = Astro.props
-const {ogptitle} = Astro.props
-const { type } = Astro.props
-const { description } = Astro.props
-const {sns_img} = Astro.props
-const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -59,9 +51,15 @@ const { title } = Astro.props;
 					<h3 class="header-aside-label">知る</h3>
 					<ul class="header-aside-linkList">
 						<li class="header-aside-linkList-item">
-							<a href="#" class="header-aside-linkList-item-link active">
-								<span class="header-aside-linkList-item-link-label active">記事トップ</span>
+							<a href="/" class="header-aside-linkList-item-link active">
+								<span class="header-aside-linkList-item-link-label active">未来洞察記事</span>
 								<!-- <span class="header-aside-linkList-item-link-arrow">→</span> -->
+							</a>
+						</li>
+						<li class="header-aside-linkList-item">
+							<a href="/diagnosis/diagnosis" class="header-aside-linkList-item-link">
+								<span class="header-aside-linkList-item-link-label">未来診断</span>
+								<span class="header-aside-linkList-item-link-arrow">→</span>
 							</a>
 						</li>
 						<li class="header-aside-linkList-item">
@@ -140,81 +138,122 @@ const { title } = Astro.props;
 				</div>
 			</div>
 		</header>
-		<!-- <div class="container"> -->
-			<!-- <aside class="aside">
-				<div class="aside-inner">
-					<div class="aside-box">
-						<h3 class="aside-label">知る</h3>
-						<ul class="aside-linkList">
-							<li class="aside-linkList-item">
-								<a href="#" class="aside-linkList-item-link">
-									<span class="aside-linkList-item-link-label">ミラテルとは</span>
-									<span class="aside-linkList-item-link-arrow">→</span>
-								</a>
-							</li>
-							<li class="aside-linkList-item">
-								<a href="#" class="aside-linkList-item-link">
-									<span class="aside-linkList-item-link-label">ミラテルの使い方</span>
-									<span class="aside-linkList-item-link-arrow">→</span>
-								</a>
-							</li>
-						</ul>
+		  <main class="main">
+				<!-- <div class="hero">
+					<div class="hero-inner">
+						<hgroup class="hero-titleBox">
+							<h2 class="hero-title">未来診断</h2>
+							<p class="hero-sub-title">AIが、あなたの未来に何が起こるのかを予測します。</p>
+						</hgroup>
+						<button class="hero-btn">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M9.1071 5.448C9.7051 3.698 12.1231 3.645 12.8321 5.289L12.8921 5.449L13.6991 7.809C13.884 8.35023 14.1829 8.84551 14.5755 9.26142C14.9682 9.67734 15.4454 10.0042 15.9751 10.22L16.1921 10.301L18.5521 11.107C20.3021 11.705 20.3551 14.123 18.7121 14.832L18.5521 14.892L16.1921 15.699C15.6507 15.8838 15.1552 16.1826 14.7391 16.5753C14.323 16.9679 13.996 17.4452 13.7801 17.975L13.6991 18.191L12.8931 20.552C12.2951 22.302 9.8771 22.355 9.1691 20.712L9.1071 20.552L8.3011 18.192C8.11628 17.6506 7.81748 17.1551 7.42485 16.739C7.03221 16.3229 6.5549 15.9959 6.0251 15.78L5.8091 15.699L3.4491 14.893C1.6981 14.295 1.6451 11.877 3.2891 11.169L3.4491 11.107L5.8091 10.301C6.35034 10.1161 6.84562 9.81719 7.26153 9.42457C7.67744 9.03195 8.00432 8.55469 8.2201 8.025L8.3011 7.809L9.1071 5.448ZM11.0001 6.094L10.1941 8.454C9.9125 9.2793 9.45437 10.0333 8.85164 10.6635C8.24891 11.2937 7.51605 11.7849 6.7041 12.103L6.4541 12.194L4.0941 13L6.4541 13.806C7.27941 14.0876 8.03341 14.5457 8.6636 15.1485C9.29379 15.7512 9.78503 16.4841 10.1031 17.296L10.1941 17.546L11.0001 19.906L11.8061 17.546C12.0877 16.7207 12.5458 15.9667 13.1486 15.3365C13.7513 14.7063 14.4842 14.2151 15.2961 13.897L15.5461 13.807L17.9061 13L15.5461 12.194C14.7208 11.9124 13.9668 11.4543 13.3366 10.8515C12.7064 10.2488 12.2152 9.51595 11.8971 8.704L11.8071 8.454L11.0001 6.094ZM19.0001 2C19.1872 2 19.3705 2.05248 19.5293 2.15147C19.688 2.25046 19.8158 2.392 19.8981 2.56L19.9461 2.677L20.2961 3.703L21.3231 4.053C21.5106 4.1167 21.6749 4.23462 21.7953 4.39182C21.9157 4.54902 21.9867 4.73842 21.9994 4.93602C22.012 5.13362 21.9657 5.33053 21.8663 5.50179C21.7669 5.67304 21.6189 5.81094 21.4411 5.898L21.3231 5.946L20.2971 6.296L19.9471 7.323C19.8833 7.51043 19.7653 7.6747 19.608 7.79499C19.4508 7.91529 19.2613 7.98619 19.0637 7.99872C18.8662 8.01125 18.6693 7.96484 18.4981 7.86538C18.3269 7.76591 18.1891 7.61787 18.1021 7.44L18.0541 7.323L17.7041 6.297L16.6771 5.947C16.4896 5.8833 16.3253 5.76538 16.2049 5.60819C16.0845 5.45099 16.0135 5.26158 16.0008 5.06398C15.9882 4.86638 16.0345 4.66947 16.1339 4.49821C16.2333 4.32696 16.3813 4.18906 16.5591 4.102L16.6771 4.054L17.7031 3.704L18.0531 2.677C18.1205 2.47943 18.2481 2.30791 18.4179 2.1865C18.5878 2.06509 18.7913 1.99987 19.0001 2Z" fill="#252528"/>
+							</svg>								
+							<p class="hero-btn-label">無料であなたの未来を見る</p>
+							<p class="hero-btn-label">→</p>
+						</button>
 					</div>
-					<div class="aside-box">
-						<h3 class="aside-label">記事を探す</h3>
-						<search class="aside-search">
-							<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M14.0001 13.9999L11.1048 11.1046M11.1048 11.1046C11.6001 10.6093 11.9929 10.0213 12.261 9.37426C12.529 8.72717 12.6669 8.03363 12.6669 7.33323C12.6669 6.63283 12.529 5.93928 12.261 5.2922C11.9929 4.64511 11.6001 4.05715 11.1048 3.56189C10.6095 3.06663 10.0216 2.67377 9.3745 2.40574C8.72742 2.13771 8.03387 1.99976 7.33347 1.99976C6.63307 1.99976 5.93953 2.13771 5.29244 2.40574C4.64535 2.67377 4.0574 3.06663 3.56214 3.56189C2.56192 4.56211 2 5.9187 2 7.33323C2 8.74775 2.56192 10.1043 3.56214 11.1046C4.56236 12.1048 5.91895 12.6667 7.33347 12.6667C8.748 12.6667 10.1046 12.1048 11.1048 11.1046Z" stroke="#ECEBF3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>			
-							<input class="aside-search-input" type="text" placeholder="キーワードで検索">					
-						</search>
-						<ul class="aside-tagList">
-							<li class="aside-tagList-item">
-								<a href="#" class="aside-tagList-item-link">Techology</a>
-							</li>
-							<li class="aside-tagList-item">
-								<a href="#" class="aside-tagList-item-link">Society</a>
-							</li>
-							<li class="aside-tagList-item">
-								<a href="#" class="aside-tagList-item-link">Energy</a>
-							</li>
-							<li class="aside-tagList-item">
-								<a href="#" class="aside-tagList-item-link">Environment</a>
-							</li>
-							<li class="aside-tagList-item">
-								<a href="#" class="aside-tagList-item-link">Education</a>
-							</li>
-							<li class="aside-tagList-item">
-								<a href="#" class="aside-tagList-item-link">Economy</a>
-							</li>
-						</ul>
+				</div> -->
+				<div class="main-inner">
+					<div class="main-container">
+						<PanList paths={paths} />
+						<slot />
 					</div>
-					<div class="aside-user">
-						<a href="" class="aside-userIcon">
-							<svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path fill-rule="evenodd" clip-rule="evenodd" d="M10 10C10 8.4087 10.6321 6.88258 11.7574 5.75736C12.8826 4.63214 14.4087 4 16 4C17.5913 4 19.1174 4.63214 20.2426 5.75736C21.3679 6.88258 22 8.4087 22 10C22 11.5913 21.3679 13.1174 20.2426 14.2426C19.1174 15.3679 17.5913 16 16 16C14.4087 16 12.8826 15.3679 11.7574 14.2426C10.6321 13.1174 10 11.5913 10 10ZM6 28V27C6 24.6131 6.94821 22.3239 8.63604 20.636C10.3239 18.9482 12.6131 18 15 18H17C19.3869 18 21.6761 18.9482 23.364 20.636C25.0518 22.3239 26 24.6131 26 27V28H6Z" fill="#252528"/>
-							</svg>							
-						</a>
-						<p class="aside-user-name">ゲストユーザー</p>
-					</div>
+					<div class="r-container">
+						<div class="r-inner">
+								<div class="r-box">
+										<p class="r-box-label">おすすめ</p>
+										<ul class="r-box-list">
+												<li class="r-box-list-item">
+														<a href="" class="r-box-list-item-link">
+																<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
+																<div class="r-box-list-item-textBox">
+																		<h4 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h4>
+																</div>
+														</a>
+												</li>
+												<li class="r-box-list-item">
+														<a href="" class="r-box-list-item-link">
+																<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
+																<div class="r-box-list-item-textBox">
+																		<h4 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h4>
+																</div>
+														</a>
+												</li>
+												<li class="r-box-list-item">
+														<a href="" class="r-box-list-item-link">
+																<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
+																<div class="r-box-list-item-textBox">
+																		<h4 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h4>
+																</div>
+														</a>
+												</li>
+										</ul>
+								</div>
+								<div class="r-box">
+										<p class="r-box-label">お知らせ</p>
+										<ul class="r-box-list">
+												<li class="r-box-list-item">
+														<a href="" class="r-box-list-item-link">
+																<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
+																<div class="r-box-list-item-textBox">
+																		<h4 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h4>
+																</div>
+														</a>
+												</li>
+												<li class="r-box-list-item">
+														<a href="" class="r-box-list-item-link">
+																<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
+																<div class="r-box-list-item-textBox">
+																		<h4 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h4>
+																</div>
+														</a>
+												</li>
+												<li class="r-box-list-item">
+														<a href="" class="r-box-list-item-link">
+																<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
+																<div class="r-box-list-item-textBox">
+																		<h4 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h4>
+																</div>
+														</a>
+												</li>
+										</ul>
+								</div>
+						</div>
+				  </div>
 				</div>
-			</aside> -->
-		  <slot />
+			</main>
 		<!-- </div> -->
 
 		<script type="module" defer>
-			document.addEventListener("DOMContentLoaded", () => {
-				const tagButtons = document.querySelectorAll(".header-aside-tagList-item-link");
+			document.addEventListener('DOMContentLoaded', () => {
+				const tagButtons = document.querySelectorAll('.header-aside-tagList-item-link');
+		
+				// タグボタンのクリックイベント
 				tagButtons.forEach((button) => {
-					button.addEventListener("click", () => {
-						const tag = button.dataset.tag;
-						console.log(`Tag clicked: ${tag}`); // デバッグ用
-						const event = new CustomEvent("tag-selected", { detail: { tag } });
-						window.dispatchEvent(event);
+					button.addEventListener('click', (event) => {
+						event.preventDefault(); // デフォルトのリンク動作を防ぐ
+		
+						const selectedTag = button.getAttribute('data-tag');
+						const newUrl = `/?tag=${encodeURIComponent(selectedTag)}`;
+		
+						// pushState で URL を変更し、履歴を更新
+						window.history.pushState({ tag: selectedTag }, '', newUrl);
+		
+						// ページを更新するためにリロード
+						window.location.href = newUrl;
 					});
+				});
+		
+				// popstate イベントでブラウザの戻る/進む操作に対応
+				window.addEventListener('popstate', (event) => {
+					const selectedTag = event.state?.tag || '';
+					const newUrl = `/?tag=${encodeURIComponent(selectedTag)}`;
+					window.location.href = newUrl;
 				});
 			});
 		</script>
+		
 		
 	</body>
 </html>
@@ -625,6 +664,196 @@ const { title } = Astro.props;
 		  &-name{
 			  font-size: 12px;
 				color: #bdbdbd;
+			}
+		}
+	}
+
+	.hero{
+		// width: calc(100% - 80px);
+		color: #fff;
+		background-color: #252528;
+		padding: 40px 24px 24px;
+		// margin-inline: 40px;
+		border-bottom: 1px solid #252528;
+
+		&-inner{
+			width: 100%;
+			padding: 24px 16px 16px;
+			align-items: center;
+			display: flex;
+			gap: 40px;
+		}
+
+		&-titleBox{
+			color: #fff;
+			// text-align: center;
+		}
+
+		&-title{
+			font-size: 32px;
+			font-weight: 600;
+			// font-family: 'Dela Gothic One', cursive;
+		}
+
+		&-sub-title{
+			// margin-top: 8px;
+			font-size: 14px;
+		}
+
+		&-btn{
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			margin-top: 40px;
+			// padding: 8px 0;
+			// border-bottom: 1px solid #252528;
+			border-radius: 100vmax;
+			padding: 8px 16px;
+			border: 1px solid #fff;
+			background-color: #fff;
+
+			&-label{
+				font-size: 12px;
+				color: #252528;
+				font-weight: 600;
+			}
+		}
+	}
+
+	.main{
+		// width: calc(100% - 241px);
+		// display: flex;
+		// justify-content: space-between;
+		max-width: 1600px;
+		// margin-inline: auto;
+		margin-left: 241px;
+		// padding-inline: 40px;
+		// gap: 40px;
+		line-height: 1.6;
+
+		@media screen and (min-width:2120px) {
+      margin-inline: auto;
+    }
+
+		@media screen and (max-width:834px) {
+			top: 0;
+      margin-inline: auto;
+			margin-top: 120px;
+			width: calc(100% - 32px);
+    }
+
+		@media screen and (max-width:440px) {
+			margin-top: 0;
+			width: 100%;
+    }
+
+		&-inner{
+			display: flex;
+		  justify-content: space-between;
+			padding-inline: 40px;
+			gap: 40px;
+
+			@media screen and (max-width:1120px) {
+        flex-direction: column;
+			  // gap: 80px;
+      }
+
+		  @media screen and (max-width:834px) {
+		  	padding-inline: 24px;
+      }
+
+		  @media screen and (max-width:440px) {
+		  	padding-inline: 16px;
+      }
+		}
+		
+		&-container{
+			width: 100%;
+			position: relative;
+			// top: 104px;
+			margin-top: 80px;
+			width: 100%;
+			margin-inline: auto;
+			margin-bottom: 80px;
+
+			@media screen and (max-width:834px) {
+				top: 0;
+      }
+
+		@media screen and (max-width:440px) {
+			margin-top: 80px;
+    }
+		}
+	}
+
+	.r-container{
+    position: relative;
+    margin-top: 80px;
+		overflow: hidden;
+		width: 100%;
+		max-width: 280px;
+
+		@media screen and (max-width:1120px) {
+      max-width: calc(100% - 24px);
+			margin-right: 24px;
+    }
+	}
+
+	.r-inner{
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+		// align-items: center;
+	}
+
+	.r-box{
+		display: flex;
+		flex-direction: column;
+	}
+
+	.r-box-label{
+		font-size: 14px;
+		font-weight: 600;
+		color: #252528;
+	}
+
+	.r-box-list{
+		margin-top: 16px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+
+		&-item{
+			width: 100%;
+
+			&-link{
+				display: flex;
+				gap: 12px;
+			}
+
+			&-img{
+				width: 45%;
+				// height: 120px;
+				aspect-ratio: 1/1;
+				object-fit: cover;
+				border-radius: 4px;
+
+				@media screen and (max-width:1120px) {
+          width: 180px;
+					aspect-ratio: 16/9;
+        }
+			}
+
+			&-title{
+				font-size: 12px;
+				font-weight: 600;
+				color: #252528;
+				padding: 4px 0;
+				letter-spacing: .05em;
+
+				@media screen and (max-width:1120px) {
+          font-size: 14px;
+        }
 			}
 		}
 	}

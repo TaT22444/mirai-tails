@@ -1,0 +1,88 @@
+---
+export interface Props {
+  paths: { label: string; url: string }[];
+}
+
+const { paths } = Astro.props; // Astro.props から props を取得
+const isSinglePath = paths.length === 1; // パスが一つかどうかを判定
+---
+
+<div class="pan">
+  <ul class="pan-list">
+    {paths.map((path, index) => (
+      <li 
+        class={`pan-item ${index === paths.length - 1 ? 'current' : ''}`} 
+        data-key={index}
+      >
+        <a 
+            href={path.url} 
+            class={`pan-item-link ${isSinglePath ? 'single' : ''}`}
+          >
+            {path.label}
+          </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style lang="scss">
+.pan {
+  max-width: 100%;
+  position: absolute;
+  top: -48px;
+  z-index: 99;
+
+  @media screen and (max-width: 834px) {
+    display: none;
+  }
+
+  &-list {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &-item {
+    position: relative;
+    border: 1px solid #636368;
+    border-radius: 100px;
+
+    &:first-of-type::before {
+      content: "";
+    }
+
+    &::before {
+      content: ">";
+      position: absolute;
+      top: 50%;
+      left: -8px;
+      transform: translateY(-50%);
+      color: #636368;
+    }
+
+    &-link {
+      display: block;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #636368;
+    }
+
+    &.current {
+      border: none;
+
+      .pan-item-link {
+        padding-left: 16px;
+        color: #636368;
+        font-weight: bold; // 目立たせるため
+
+        &.single {
+          border: 1px solid #636368;
+          padding: 8px 16px; // パスが一つのときのスタイル
+          border-radius: 100px;
+      }
+      }
+    }
+  }
+}
+</style>

@@ -6,255 +6,91 @@ import { getBlogs } from '../library/microcms';
 const response = await getBlogs({
   fields: ["id", "title", "thumbnail", "tag", "publishedAt", "article_name", "article_summary", "article_link"]
 });
+
+import PanList from '../components/PanList.astro';
+
+const paths = [
+  { label: '未来洞察記事', url: '/' },
+];
 const articles = response.contents;
+const hasArticles = articles.length > 0; // 記事があるかどうかを判定
 ---
 
 <Layout 
   title="ミラテル"
-	URL = "https://miratel.netlify.app/"
-	sns_img = "../public/images/me.JPG"
-	ogptitle="ミラテル | AI未来洞察" 
-	type="website" 
-	description="ミラテル | AIが既存の記事やニュースをもとに、それが実現、進化していった先にどういった未来が待ち受けているかを予想し、極端な未来のシナリオを推測します。" 
+  URL="https://miratel.netlify.app/"
+  sns_img="../public/images/me.JPG"
+  ogptitle="ミラテル | AI未来洞察"
+  type="website"
+  description="ミラテルはAIを使って未来予測を行う洞察サイトです。"
+  paths={paths}
 >
-	<main class="main">
-		<div class="pan">
-			<ul class="pan-list">
-				<li class="pan-item">
-					<a href="" class="pan-item-link">記事トップ</a>
-				</li>
-			</ul>
-		</div>
-		<div class="main-inner">
-			<h2 class="title">未来洞察記事</h2>
-			<div class="category">
-				<p class="category-label">カテゴリー</p>
-				<ul class="category-list">
-					<li class="category-list-item">
-						<button class="category-list-item-link">
-							<p class="category-list-item-label">Technology</p>
-						</button>
-					</li>
-					<li class="category-list-item">
-						<button class="category-list-item-link">
-							<p class="category-list-item-label">Society</p>
-						</button>
-					</li>
-					<li class="category-list-item">
-						<button class="category-list-item-link">
-							<p class="category-list-item-label">Energy</p>
-						</button>
-					</li>
-					<li class="category-list-item">
-						<button class="category-list-item-link">
-							<p class="category-list-item-label">Environment</p>
-						</button>
-					</li>
-					<li class="category-list-item">
-						<button class="category-list-item-link">
-							<p class="category-list-item-label">Education</p>
-						</button>
-					</li>
-					<li class="category-list-item">
-						<button class="category-list-item-link">
-							<p class="category-list-item-label">Economy</p>
-						</button>
-					</li>
-				</ul>
-			</div>
-			<h2 class="search-word">新着記事</h2>
-			<ul class="filter-list">
-				<li class="filter-list-item">
-					<button class="filter-list-item-link active-filter">
-						<p class="filter-list-item-label">追加日</p>
-					</button>
-				</li>
-				<li class="filter-list-item">
-					<button class="filter-list-item-link">
-						<p class="filter-list-item-label">更新日</p>
-					</button>
-				</li>
-				<li class="filter-list-item">
-					<button class="filter-list-item-link">
-						<p class="filter-list-item-label">コメント数</p>
-					</button>
-				</li>
-			</ul>
-			<div class="article">
-				<ArticleList {articles} />
-			</div>
-		</div>
-		<div class="r-container">
-			<div class="r-inner">
-				<div class="r-box">
-					<p class="r-box-label">おすすめ</p>
-					<ul class="r-box-list">
-						<li class="r-box-list-item">
-							<a href="" class="r-box-list-item-link">
-								<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
-								<div class="r-box-list-item-textBox">
-									<h3 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h3>
-								</div>
-							</a>
-						</li>
-						<li class="r-box-list-item">
-							<a href="" class="r-box-list-item-link">
-								<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
-								<div class="r-box-list-item-textBox">
-									<h3 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h3>
-								</div>
-							</a>
-						</li>
-						<li class="r-box-list-item">
-							<a href="" class="r-box-list-item-link">
-								<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
-								<div class="r-box-list-item-textBox">
-									<h3 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h3>
-								</div>
-							</a>
-						</li>
-					</ul>
-				</div>
-				<div class="r-box">
-					<p class="r-box-label">お知らせ</p>
-					<ul class="r-box-list">
-						<li class="r-box-list-item">
-							<a href="" class="r-box-list-item-link">
-								<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
-								<div class="r-box-list-item-textBox">
-									<h3 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h3>
-								</div>
-							</a>
-						</li>
-						<li class="r-box-list-item">
-							<a href="" class="r-box-list-item-link">
-								<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
-								<div class="r-box-list-item-textBox">
-									<h3 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h3>
-								</div>
-							</a>
-						</li>
-						<li class="r-box-list-item">
-							<a href="" class="r-box-list-item-link">
-								<img src="../unsplash_Aq32wiCKqQE.png" alt="" class="r-box-list-item-img" loading="lazy">
-								<div class="r-box-list-item-textBox">
-									<h3 class="r-box-list-item-title">AIの発達により、問題解決能力/論理的思考力の低下へ。AIの発達により、問題解決能力/論理的思考力の低下へ</h3>
-								</div>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</main>
+<div class="category">
+	<p class="category-label">カテゴリー</p>
+	<ul class="category-list">
+		<li class="category-list-item">
+			<button class="category-list-item-link">
+				<p class="category-list-item-label">Technology</p>
+			</button>
+		</li>
+		<li class="category-list-item">
+			<button class="category-list-item-link">
+				<p class="category-list-item-label">Society</p>
+			</button>
+		</li>
+		<li class="category-list-item">
+			<button class="category-list-item-link">
+				<p class="category-list-item-label">Energy</p>
+			</button>
+		</li>
+		<li class="category-list-item">
+			<button class="category-list-item-link">
+				<p class="category-list-item-label">Environment</p>
+			</button>
+		</li>
+		<li class="category-list-item">
+			<button class="category-list-item-link">
+				<p class="category-list-item-label">Education</p>
+			</button>
+		</li>
+		<li class="category-list-item">
+			<button class="category-list-item-link">
+				<p class="category-list-item-label">Economy</p>
+			</button>
+		</li>
+	</ul>
+</div>
+<h2 class="search-word">新着記事</h2>
+<ul class="filter-list">
+	<li class="filter-list-item">
+		<button class="filter-list-item-link active-filter">
+			<p class="filter-list-item-label">追加日</p>
+		</button>
+	</li>
+	<li class="filter-list-item">
+		<button class="filter-list-item-link">
+			<p class="filter-list-item-label">更新日</p>
+		</button>
+	</li>
+	<li class="filter-list-item">
+		<button class="filter-list-item-link">
+			<p class="filter-list-item-label">コメント数</p>
+		</button>
+	</li>
+</ul>
+<div class="article">
+	{hasArticles ? (
+		<ArticleList {articles} />
+	) : (
+		<p class="no-articles-message">まだ記事はありません。</p>
+	)}
+</div>
 </Layout>
 
 <style lang="scss">
-	main {
-		position: relative;
-		// top: 104px;
-		// margin-left: 304px;
-		width: calc(80vw - 96px);
-		max-width: calc(100% - 2rem);
-		color: #252528;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-
-	.main{
-		width: calc(100% - 241px);
-		display: flex;
-		justify-content: space-between;
-		max-width: 1600px;
-		// margin-inline: auto;
-		margin-left: 241px;
-		padding-inline: 40px;
-		gap: 40px;
-
-		@media screen and (min-width:2120px) {
-      margin-inline: auto;
-    }
-
-		@media screen and (max-width:1120px) {
-      flex-direction: column;
-			// gap: 80px;
-    }
-
-		@media screen and (max-width:834px) {
-			top: 0;
-      margin-inline: auto;
-			margin-top: 120px;
-			padding-inline: 24px;
-			width: calc(100% - 32px);
-    }
-
-		@media screen and (max-width:440px) {
-			margin-top: 0;
-			padding-inline: 16px;
-			width: 100%;
-    }
-		
-		&-inner{
-			width: 100%;
-			position: relative;
-			top: 104px;
-			width: 100%;
-			margin-inline: auto;
-			margin-bottom: 80px;
-
-			@media screen and (max-width:834px) {
-				top: 0;
-      }
-
-		@media screen and (max-width:440px) {
-			margin-top: 80px;
-    }
-		}
-	}
-
-	.pan{
-		position: absolute;
-		top: 40px;
-		z-index: 99;
-
-		@media screen and (max-width:834px) {
-			// display: none;
-			top: 88px;
-    }
-
-		&-list{
-			display: flex;
-			align-items: center;
-			gap: 24px;
-			// border: 1px solid #252528;
-		}
-
-		&-item{
-			position: relative;
-			// background-color: #252528;
-			border: 1px solid #252528;
-		  border-radius: 8px;
-
-			&:first-of-type::before{
-				content: "";
-			}
-
-			&::before{
-				content: ">";
-				position: absolute;
-				top: 50%;
-				left: -18px;
-				transform: translateY(-50%);
-			}
-
-			&-link{
-				display: block;
-				padding: 8px 16px;
-				font-size: 12px;
-				font-weight: 600;
-				color: #252528;
-			}
-		}
+	.hero{
+		width: 100%;
+		background-color: #252528;
 	}
 
 	.title{
@@ -315,8 +151,8 @@ const articles = response.contents;
 	}
 
 	.search-word{
-		padding: 8px 0 8px;
-		font-size: 40px;
+		padding: 0 0 8px;
+		font-size: 32px;
 		font-weight: 600;
 		color: #252528;
 
@@ -565,66 +401,93 @@ const articles = response.contents;
 			}
 		}
 	}
+	.no-articles-message {
+  color: #d3d3d3;
+}
 </style>
 
-<script>
+<script type="module">
   document.addEventListener('DOMContentLoaded', () => {
-    const tagButtons = document.querySelectorAll<HTMLButtonElement>('.header-aside-tagList-item-link');
-    const articles = document.querySelectorAll<HTMLLIElement>('.article-item');
-    const searchWordElement = document.querySelector<HTMLHeadingElement>('.search-word'); // h2の要素取得
+  const tagButtons = document.querySelectorAll('.header-aside-tagList-item-link');
+  const articles = document.querySelectorAll('.article-item');
+  const searchWordElement = document.querySelector('.search-word');
+  const noArticlesMessage = document.createElement('p'); // 記事がない場合のメッセージ
+  noArticlesMessage.classList.add('no-articles-message');
+  noArticlesMessage.textContent = 'まだ記事はありません。';
+  document.querySelector('.article').appendChild(noArticlesMessage);
 
-    tagButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const selectedTag = button.getAttribute('data-tag');
+  const showMoreButton = document.getElementById('show-more-button');
+  let visibleCount = 6; // 初期表示数
+  let currentTag = ''; // 現在選択されているタグ
 
-        // タイトルを変更
-        if (searchWordElement && selectedTag) {
-          searchWordElement.textContent = `${selectedTag}`;
-        }
+  /**
+   * 指定されたタグに基づいて記事を更新する関数
+   */
+  const updateArticles = (tag) => {
+    let hasVisibleArticles = false;
+    let displayedArticles = 0;
 
-        // すべてのタグを非表示
-        articles.forEach((article) => {
-          (article as HTMLElement).style.display = 'none';
-        });
+    articles.forEach((article) => {
+      const articleTag = article.getAttribute('data-tag');
+      const matchesTag = tag === '' || articleTag === tag;
 
-        // 選択されたタグの記事を表示
-        articles.forEach((article) => {
-          if (article.getAttribute('data-tag') === selectedTag) {
-            (article as HTMLElement).style.display = 'block';
-          }
-        });
-      });
+      // 該当する記事が表示されるべきか判定
+      if (matchesTag && displayedArticles < visibleCount) {
+        article.style.display = 'block';
+        hasVisibleArticles = true;
+        displayedArticles++;
+      } else {
+        article.style.display = 'none';
+      }
+    });
+
+    // 「まだ記事はありません」メッセージの表示
+    noArticlesMessage.style.display = hasVisibleArticles ? 'none' : 'block';
+
+    // 「もっと見る」ボタンの表示制御
+    const totalMatchingArticles = Array.from(articles).filter(article =>
+      tag === '' || article.getAttribute('data-tag') === tag
+    ).length;
+    showMoreButton.style.display = displayedArticles < totalMatchingArticles ? 'block' : 'none';
+
+    // 検索ワードの更新
+    searchWordElement.textContent = tag ? `${tag}` : '新着記事';
+  };
+
+  /**
+   * URLからタグを取得して記事をフィルタリング
+   */
+  const initializeFromURL = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    currentTag = urlParams.get('tag') || ''; // タグがない場合は空文字
+    visibleCount = 6; // 表示件数をリセット
+    updateArticles(currentTag);
+  };
+
+  // タグボタンのクリックイベント
+  tagButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      currentTag = button.getAttribute('data-tag') || ''; // 選択されたタグを取得
+      const newUrl = `${window.location.pathname}?tag=${encodeURIComponent(currentTag)}`;
+      window.history.pushState({}, '', newUrl); // URLを更新
+      visibleCount = 6; // 表示件数をリセット
+      updateArticles(currentTag);
     });
   });
-</script>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const categoryButtons = document.querySelectorAll<HTMLButtonElement>('.category-list-item-link');
-    const articles = document.querySelectorAll<HTMLLIElement>('.article-item');
-    const searchWordElement = document.querySelector<HTMLHeadingElement>('.search-word'); // h2の要素取得
-
-    categoryButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const selectedCategory = button.textContent?.trim();
-
-        // タイトルをカテゴリ名に変更
-        if (searchWordElement && selectedCategory) {
-          searchWordElement.textContent = `${selectedCategory}`;
-        }
-
-        // すべての記事を非表示
-        articles.forEach((article) => {
-          (article as HTMLElement).style.display = 'none';
-        });
-
-        // 選択されたカテゴリの記事を表示
-        articles.forEach((article) => {
-          if (article.getAttribute('data-tag') === selectedCategory) {
-            (article as HTMLElement).style.display = 'block';
-          }
-        });
-      });
+  // 「もっと見る」ボタンのクリックイベント
+  if (showMoreButton) {
+    showMoreButton.addEventListener('click', () => {
+      visibleCount += 6; // 6件ずつ追加表示
+      updateArticles(currentTag);
     });
-  });
+  }
+
+  // 初期表示の設定
+  initializeFromURL();
+
+  // popstateイベントでブラウザの戻る/進むに対応
+  window.addEventListener('popstate', initializeFromURL);
+});
+
 </script>

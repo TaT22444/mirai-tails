@@ -13,31 +13,34 @@ interface Article {
 }
 
 let visibleCount = 6; // 初期表示数6件
+
+const { articles } = Astro.props; // index.astro から受け取った記事リスト
+const hasArticles = articles.length > 0; // 記事の有無を判定
 ---
 
 <ul class="article-list" id="article-list">
-  {response.contents.map((content, index) => (
-    <li 
-      class="article-item" 
-      data-tag={content.tag} 
-      style={`display: ${index < visibleCount ? 'block' : 'none'}`}
-    >
-      <a href={"../" + content.id} class="article-item-link">
-        <img class="article-item-img" src={content.thumbnail.url} alt="" />
-        <ul class="article-item-tagList">
-          <li class="article-item-tagList-item">{content.tag}</li>
-          <li class="article-item-tagList-item">
-            <p class="article-item-timestamp">
-              <time class="article-item-timestamp-label" datetime="">
-                {content.publishedAt.substring(0, 10)}
-              </time>
-            </p>
-          </li>
-        </ul>
-        <h3 class="article-item-title">{content.title}</h3>
-      </a>
-    </li>
-  ))}
+	{articles.map((content: { tag: unknown; id: string; thumbnail: { url: string | null | undefined; }; publishedAt: string; title: unknown; }, index: number) => (
+		<li 
+			class="article-item" 
+			data-tag={content.tag} 
+			style={`display: ${index < visibleCount ? 'block' : 'none'}`}
+		>
+			<a href={"../" + content.id} class="article-item-link">
+				<img class="article-item-img" src={content.thumbnail.url} alt="" />
+				<ul class="article-item-tagList">
+					<li class="article-item-tagList-item">{content.tag}</li>
+					<li class="article-item-tagList-item">
+						<p class="article-item-timestamp">
+							<time class="article-item-timestamp-label" datetime="">
+								{content.publishedAt.substring(0, 10)}
+							</time>
+						</p>
+					</li>
+				</ul>
+				<h3 class="article-item-title">{content.title}</h3>
+			</a>
+		</li>
+	))}
 </ul>
 
 <div class="show-more-button-wrapper">
@@ -47,6 +50,10 @@ let visibleCount = 6; // 初期表示数6件
 </div>
 
 <style lang="scss">
+	.no-articles{
+		font-size: 200px;
+	}
+
 .prot{
 	display: none;
 }
@@ -141,7 +148,7 @@ let visibleCount = 6; // 初期表示数6件
 				width: 100%;
 				aspect-ratio: 16/9;
 				object-fit: cover;
-				border-radius: 8px;
+				border-radius: 4px;
 			}
 
 			&-tagList{
@@ -159,13 +166,14 @@ let visibleCount = 6; // 初期表示数6件
 
 			&-title{
 				position: relative;
-				font-size: 18px;
-				font-weight: 500;
+				font-size: 20px;
+				font-weight: 600;
 				color: #252528;
 				margin-top: 8px;
+				line-height: 1.6;
 
 				@media screen and (max-width:440px) {
-          // font-size: 20px;
+					font-size: 18px;
 					margin-top: 4px;
         }
 
@@ -235,40 +243,57 @@ let visibleCount = 6; // 初期表示数6件
 			}
 		}
 	}
+	
 </style>
-
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const articleList = document.getElementById('article-list') as HTMLElement | null;
-    const showMoreButton = document.getElementById('show-more-button') as HTMLButtonElement | null;
+    const articleList = document.getElementById('article-list');
+    const showMoreButton = document.getElementById('show-more-button');
     let visibleCount = 6;
+    let currentTag = ''; // 現在選択されているタグ
+
+    // クエリパラメータからタグを取得し、フィルタリング
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedTag = urlParams.get('tag'); // クエリからタグ取得
+    if (selectedTag) currentTag = selectedTag; // タグがある場合、現在のタグに設定
 
     const updateArticles = () => {
-      if (!articleList || !showMoreButton) return; // nullチェック
+      if (!articleList || !showMoreButton) return;
 
-      const articles = Array.from(articleList.children) as HTMLElement[];
+      const articles = Array.from(articleList.children);
+      const filteredArticles = articles.filter((article) =>
+        currentTag ? article.getAttribute('data-tag') === currentTag : true
+      );
 
       // 記事の表示・非表示を更新
-      articles.forEach((article, index) => {
+      filteredArticles.forEach((article, index) => {
         article.style.display = index < visibleCount ? 'block' : 'none';
       });
 
-      // ボタンの表示制御
-      showMoreButton.style.display = visibleCount >= articles.length ? 'none' : 'block';
+      // 「もっと見る」ボタンの表示制御
+      showMoreButton.style.display =
+        visibleCount >= filteredArticles.length ? 'none' : 'block';
     };
+
+    // タグボタンのクリックイベント
+    const tagButtons = document.querySelectorAll('.header-aside-tagList-item-link');
+    tagButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        currentTag = button.dataset.tag || ''; // 選択されたタグを取得
+        visibleCount = 6; // 表示件数をリセット
+        updateArticles();
+      });
+    });
 
     // 「もっと見る」ボタンのイベントリスナー
     if (showMoreButton) {
       showMoreButton.addEventListener('click', () => {
-        visibleCount += 6; // 3件ずつ追加表示
+        visibleCount += 6; // 6件ずつ追加表示
         updateArticles();
       });
     }
 
-    // 初期表示とボタンの表示制御
+    // 初期表示の更新
     updateArticles();
-    if (articleList && articleList.children.length > 6 && showMoreButton) {
-      showMoreButton.hidden = false;
-    }
   });
 </script>
