@@ -247,53 +247,47 @@ const hasArticles = articles.length > 0; // 記事の有無を判定
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const articleList = document.getElementById('article-list');
-    const showMoreButton = document.getElementById('show-more-button');
-    let visibleCount = 6;
-    let currentTag = ''; // 現在選択されているタグ
+  const tagButtons = document.querySelectorAll('.header-aside-tagList-item-link');
+  const articleList = document.getElementById('article-list');
+  const showMoreButton = document.getElementById('show-more-button');
+  let visibleCount = 6;
+  let currentTag = ''; // 現在選択されているタグ
 
-    // クエリパラメータからタグを取得し、フィルタリング
-    const urlParams = new URLSearchParams(window.location.search);
-    const selectedTag = urlParams.get('tag'); // クエリからタグ取得
-    if (selectedTag) currentTag = selectedTag; // タグがある場合、現在のタグに設定
+  if (!articleList || !showMoreButton) return;
 
-    const updateArticles = () => {
-      if (!articleList || !showMoreButton) return;
+  const articles = Array.from(articleList.children) as HTMLElement[];
 
-      const articles = Array.from(articleList.children);
-      const filteredArticles = articles.filter((article) =>
-        currentTag ? article.getAttribute('data-tag') === currentTag : true
-      );
+  const updateArticles = () => {
+    const filteredArticles = articles.filter((article) =>
+      currentTag ? article.getAttribute('data-tag') === currentTag : true
+    );
 
-      // 記事の表示・非表示を更新
-      filteredArticles.forEach((article, index) => {
-        article.style.display = index < visibleCount ? 'block' : 'none';
-      });
-
-      // 「もっと見る」ボタンの表示制御
-      showMoreButton.style.display =
-        visibleCount >= filteredArticles.length ? 'none' : 'block';
-    };
-
-    // タグボタンのクリックイベント
-    const tagButtons = document.querySelectorAll('.header-aside-tagList-item-link');
-    tagButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        currentTag = button.dataset.tag || ''; // 選択されたタグを取得
-        visibleCount = 6; // 表示件数をリセット
-        updateArticles();
-      });
+    // 記事の表示・非表示を更新
+    filteredArticles.forEach((article, index) => {
+      article.style.display = index < visibleCount ? 'block' : 'none';
     });
 
-    // 「もっと見る」ボタンのイベントリスナー
-    if (showMoreButton) {
-      showMoreButton.addEventListener('click', () => {
-        visibleCount += 6; // 6件ずつ追加表示
-        updateArticles();
-      });
-    }
+    // 「もっと見る」ボタンの表示制御
+    showMoreButton.style.display = visibleCount >= filteredArticles.length ? 'none' : 'block';
+  };
 
-    // 初期表示の更新
+  // タグボタンのクリックイベント
+  tagButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      currentTag = (button as HTMLElement).dataset.tag || ''; // 選択されたタグを取得
+      visibleCount = 6; // 表示件数をリセット
+      updateArticles();
+    });
+  });
+
+  // 「もっと見る」ボタンのイベントリスナー
+  showMoreButton.addEventListener('click', () => {
+    visibleCount += 6; // 6件ずつ追加表示
     updateArticles();
   });
+
+  // 初期表示の更新
+  updateArticles();
+});
+
 </script>
