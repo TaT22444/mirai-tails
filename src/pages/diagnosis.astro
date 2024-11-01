@@ -240,12 +240,17 @@ const paths = [
         content: "";
         position: absolute;
         top: 50%;
-        left: -50vw;
+        left: -40vw;
         translate: 0 -50%;
         height: 1px;
         width: 100vw;
         background-color: #9b9b9f;
         z-index: -1;
+
+        @media screen and (max-width:440px) {
+          width: 10000px;
+          left: -30vw;
+        }
       }
 
       &-label{
