@@ -124,6 +124,10 @@ const paths = [
       color: #252528;
       text-align: center;
 
+      @media screen and (max-width:440px) {
+        margin-top: 24px;
+      }
+
       &::before{
         content: "";
         position: absolute;
@@ -171,7 +175,7 @@ const paths = [
       border-radius: 16px;
 
       @media screen and (max-width:834px) {
-        width: 100%;
+        width: 90%;
         max-width: 360px;
         margin-inline: auto;
         padding: 16px;
@@ -228,6 +232,7 @@ const paths = [
       align-items: center;
       gap: 8px;
       padding: 16px 24px;
+      margin-inline: auto;
       background-color: #252528;
       border-radius: 100vmax;
 
