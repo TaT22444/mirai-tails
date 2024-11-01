@@ -92,6 +92,10 @@ const paths = [
       padding: 16px 24px;
       border-radius: 8px;
       background-color: #363636;
+
+      @media screen and (max-width:440px) {
+        padding: 8px 16px;
+      }
     }
           
     &-title{
@@ -110,19 +114,20 @@ const paths = [
     &-sub-text{
       position: relative;
       display: flex;
-      font-size: 12px;
+      font-size: 18px;
       font-weight: 600;
       margin-top: 48px;
       flex-direction: column;
       justify-self: center;
       color: #252528;
+      text-align: center;
 
       &::before{
         content: "";
         position: absolute;
-        top: -80px;
+        top: 0;
         left: -16px;
-        width: 10px;
+        width: 1px;
         height: 20px;
         background-color: #252528;
         rotate: -30deg;
@@ -130,9 +135,9 @@ const paths = [
       &::after{
         content: "";
         position: absolute;
-        top: 40px;
+        top: 0;
         right: -16px;
-        width: 10px;
+        width: 1px;
         height: 20px;
         background-color: #252528;
         rotate: 30deg;
@@ -152,9 +157,6 @@ const paths = [
         flex-direction: column;
         gap: 16px;
         margin-top: 24px;
-      }
-
-		  @media screen and (max-width:440px) {
       }
     }
 
